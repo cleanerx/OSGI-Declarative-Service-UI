@@ -61,6 +61,7 @@ public class ComponentLabelProvider extends StyledCellLabelProvider implements I
 		imageRegistry.put(new Integer(ComponentConfigurationDTO.UNSATISFIED_CONFIGURATION).toString(), ImageDescriptor.createFromURL(DSUIActivator.getDefault().getBundle().getEntry("res/configurationUnsatisfied.png")));
 		imageRegistry.put("UnsatisfiedService", ImageDescriptor.createFromURL(DSUIActivator.getDefault().getBundle().getEntry("res/unsatisfiedService.png")));
 		imageRegistry.put("SatisfiedService", ImageDescriptor.createFromURL(DSUIActivator.getDefault().getBundle().getEntry("res/satisfiedService.png")));
+		imageRegistry.put("ProvdidedService", ImageDescriptor.createFromURL(DSUIActivator.getDefault().getBundle().getEntry("res/providedService.png")));
 		numberFormat = new DecimalFormat("000");
 	}
 	
@@ -178,7 +179,8 @@ public class ComponentLabelProvider extends StyledCellLabelProvider implements I
   public void update(ViewerCell cell) {
     Object obj = cell.getElement();
     if(obj instanceof String) {
-    	cell.setText((String) obj);
+        cell.setText((String) obj);
+		cell.setImage(imageRegistry.get("ProvdidedService"));
     }
     if(obj instanceof Reference) {
     	Reference reference = (Reference) obj;
@@ -219,7 +221,6 @@ public class ComponentLabelProvider extends StyledCellLabelProvider implements I
         cell.setText(buf.toString());
 		cell.setImage(imageRegistry.get("UnsatisfiedService"));
       }
-
     if(obj instanceof ComponentConfigurationDTO) {
     	ComponentConfigurationDTO componentDescriptionDTO = (ComponentConfigurationDTO) obj;
     	StyledString styledString = new StyledString("[" + numberFormat.format(componentDescriptionDTO.id) + "]" + componentDescriptionDTO.description.name);

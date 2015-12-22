@@ -62,7 +62,12 @@ public class ComponentContentProvider implements ITreeContentProvider {
 	public Object[] getChildren(Object parentElement) {
 		if(parentElement instanceof ComponentConfigurationDTO) {
 			ComponentConfigurationDTO componentConfigurationDTO = (ComponentConfigurationDTO) parentElement;
-			List<DTO> list = new ArrayList<DTO>();
+			List<Object> list = new ArrayList<Object>();
+			if(componentConfigurationDTO.description.serviceInterfaces != null) {
+				for (String serviceInterface : componentConfigurationDTO.description.serviceInterfaces) {
+					list.add(serviceInterface);
+				}
+			}
 			if(componentConfigurationDTO.satisfiedReferences != null) {
 				for (SatisfiedReferenceDTO dto : componentConfigurationDTO.satisfiedReferences) {
 					list.add(dto);
@@ -73,7 +78,7 @@ public class ComponentContentProvider implements ITreeContentProvider {
 					list.add(dto);
 				}
 			}
-			return list.toArray(new DTO[list.size()]);
+			return list.toArray(new Object[list.size()]);
 		}
 //		List<String> list = new ArrayList<String>();
 		List<Reference> list = new ArrayList<Reference>();
