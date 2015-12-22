@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension
+         point="org.eclipse.ui.views">
+      <view
+            class="org.osgi.ds.ui.ComponentVisualizationView"
+            icon="res/component.png"
+            id="org.osgi.ds.ui.componentview"
+            name="Component View"
+            restorable="true">
+      </view>
+      <view
+            class="org.osgi.ds.ui.ComponentViewer"
+            icon="res/component.png"
+            id="org.osgi.ds.ui.componentlist"
+            name="Component List"
+            restorable="true">
+      </view>
+   </extension>
+<extension
+      point="org.eclipse.ui.handlers">
+   <handler
+         class="org.osgi.ds.ui.handler.SelectComponentHandler"
+         commandId="org.osgi.ds.ui.selectcomponent">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.FilterDisabledComponentsHandler"
+         commandId="org.osgi.ds.ui.showdisabled">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.FilterEnablingComponentsHandler"
+         commandId="org.osgi.ds.ui.showenabling">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.FilterUnsatisfiedComponentsHandler"
+         commandId="org.osgi.ds.ui.showunsatisfied">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.FilterActivatingComponentsHandler"
+         commandId="org.osgi.ds.ui.showactivating">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.FilterActiveComponentsHandler"
+         commandId="org.osgi.ds.ui.showactive">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.FilterRegisteredComponentsHandler"
+         commandId="org.osgi.ds.ui.showregistered">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.FilterFactoryComponentsHandler"
+         commandId="org.osgi.ds.ui.showfactory">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.FilterDeactivatingComponentsHandler"
+         commandId="org.osgi.ds.ui.showdeactivating">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.FilterDisablingComponentsHandler"
+         commandId="org.osgi.ds.ui.showdisabling">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.FilterDisposingComponentsHandler"
+         commandId="org.osgi.ds.ui.showdisposing">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.FilterDisposedComponentsHandler"
+         commandId="org.osgi.ds.ui.showdisposed">
+   </handler>
+</extension>
+<extension
+      point="org.eclipse.ui.commands">
+   <command
+         defaultHandler="org.osgi.ds.ui.handler.SelectComponentHandler"
+         id="org.osgi.ds.ui.selectcomponent"
+         name="Select Component">
+   </command>
+   <command
+         description="Shows the enabling components"
+         id="org.osgi.ds.ui.showenabling"
+         name="Show Enabling">
+      <state
+            id="org.osgi.ds.ui.enabling.state">
+      </state>
+   </command>
+   <command
+         description="Shows the unsatisfied components"
+         id="org.osgi.ds.ui.showunsatisfied"
+         name="Show Unsatisfied">
+   </command>
+   <command
+         description="Shows the activating components"
+         id="org.osgi.ds.ui.showactivating"
+         name="Show Activating">
+   </command>
+   <command
+         description="Shows the active components"
+         id="org.osgi.ds.ui.showactive"
+         name="Show Active">
+   </command>
+   <command
+         description="Shows the registered components"
+         id="org.osgi.ds.ui.showregistered"
+         name="Show Registered">
+   </command>
+   <command
+         description="Shows the Factory components"
+         id="org.osgi.ds.ui.showfactory"
+         name="Show Factory">
+   </command>
+   <command
+         description="Shows the deactivating components"
+         id="org.osgi.ds.ui.showdeactivating"
+         name="Show Deactivating">
+   </command>
+   <command
+         description="Shows the disabling components"
+         id="org.osgi.ds.ui.showdisabling"
+         name="Show Disabling">
+   </command>
+   <command
+         description="Shows the disposing components"
+         id="org.osgi.ds.ui.showdisposing"
+         name="Show Disposing">
+   </command>
+   <command
+         description="Shows the disposed components"
+         id="org.osgi.ds.ui.showdisposed"
+         name="Show Disposed">
+   </command>
+</extension>
+<extension
+      point="org.eclipse.ui.menus">
+   <menuContribution
+         allPopups="false"
+         locationURI="toolbar:org.osgi.ds.ui.componentview?after=additions">
+      <command
+            commandId="org.osgi.ds.ui.selectcomponent"
+            icon="res/database_go_16x16.png"
+            label="Select Component"
+            style="push">
+      </command>
+   </menuContribution>
+   <menuContribution
+         locationURI="menu:org.osgi.ds.ui.componentlist?after=additions">
+      <command
+            commandId="org.osgi.ds.ui.showdisabled"
+            label="Show Disabled"
+            style="toggle">
+      </command>
+      <command
+            commandId="org.osgi.ds.ui.showenabling"
+            label="Show Enabling"
+            style="toggle">
+      </command>
+      <command
+            commandId="org.osgi.ds.ui.showunsatisfied"
+            label="Show Unsatisfied"
+            style="toggle">
+      </command>
+      <command
+            commandId="org.osgi.ds.ui.showactivating"
+            label="Show Activating"
+            style="toggle">
+      </command>
+      <command
+            commandId="org.osgi.ds.ui.showactive"
+            label="Show Active"
+            style="toggle">
+      </command>
+      <command
+            commandId="org.osgi.ds.ui.showregistered"
+            label="Show Registered"
+            style="toggle">
+      </command>
+      <command
+            commandId="org.osgi.ds.ui.showfactory"
+            label="Show Component Factory"
+            style="toggle">
+      </command>
+      <command
+            commandId="org.osgi.ds.ui.showdeactivating"
+            label="Show Deactivating"
+            style="toggle">
+      </command>
+      <command
+            commandId="org.osgi.ds.ui.showdisabling"
+            label="Show Disabling"
+            style="toggle">
+      </command>
+      <command
+            commandId="org.osgi.ds.ui.showdisposing"
+            label="Show Disposing"
+            style="toggle">
+      </command>
+      <command
+            commandId="org.osgi.ds.ui.showdisposed"
+            label="Show Disposed"
+            style="toggle">
+      </command>
+   </menuContribution>
+</extension>
+<extension
+    point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+    <propertyContributor contributorId="component.PropertyContributor"> 
+        <propertyCategory category="Component"> 
+        </propertyCategory> 
+    </propertyContributor> 
+</extension>
+<extension
+      point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+   <propertyTabs
+          contributorId="component.PropertyContributor">
+   <propertyTab
+         category="Component"
+         id="component.main.tab"
+         label="Properties">
+    </propertyTab>
+   </propertyTabs>
+</extension>
+<extension
+      point="org.eclipse.ui.views.properties.tabbed.propertySections">
+    <propertySections
+          contributorId="component.PropertyContributor">
+        <propertySection
+              class="org.osgi.ds.ui.properties.ComponentPropertySection"
+              id="component.main.tab.properties"
+              tab="component.main.tab">
+        </propertySection>
+    </propertySections>
+</extension>
+     
+</plugin>
