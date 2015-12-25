@@ -7,7 +7,8 @@ Bundle-Activator: org.osgi.scr.rmi.client.RMIClientActivator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Service-Component: OSGI-INF/org.osgi.scr.rmi.client.RMIStrippedSCRServiceManager.xml
+Service-Component: OSGI-INF/org.osgi.scr.rmi.client.RMIServiceNotifier.xml,
+ OSGI-INF/org.osgi.scr.rmi.client.RMIStrippedSCRServiceManager.xml
 Import-Package: org.osgi.scr.rmi.api;version="[1.0.0,2.0.0)",
  org.osgi.service.component.annotations,
  org.osgi.service.component.runtime.dto;version="1.3.0",

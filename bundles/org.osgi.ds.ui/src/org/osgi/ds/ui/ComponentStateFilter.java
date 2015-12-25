@@ -15,9 +15,9 @@
  */
 package org.osgi.ds.ui;
 
-import org.apache.felix.scr.Component;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 
 public class ComponentStateFilter extends ViewerFilter {
 
@@ -25,12 +25,13 @@ public class ComponentStateFilter extends ViewerFilter {
 
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
-		if(true) {
-			return true;
-		}
-		if(element instanceof Component) {
-			Component component = (Component) element;
-			if((filter & component.getState()) == 0) {
+//		if(true) {
+//			return true;
+//		}
+		if(element instanceof ComponentConfigurationDTO) {
+			ComponentConfigurationDTO componentConfigurationDTO = (ComponentConfigurationDTO) element;
+//			Component component = (Component) element;
+			if((filter & componentConfigurationDTO.state) == 0) {
 				return false;
 			}
 		}

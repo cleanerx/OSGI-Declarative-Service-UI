@@ -17,6 +17,8 @@
 package org.osgi.ds.ui;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.felix.scr.ScrService;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -24,22 +26,26 @@ import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.part.ViewPart;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.ServiceListener;
 import org.osgi.framework.ServiceReference;
+import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
+import org.osgi.service.scr.api.IComponentListener;
 import org.osgi.service.scr.api.StrippedServiceComponentRuntime;
 import org.osgi.util.tracker.ServiceTracker;
 
-public class ComponentViewer extends ViewPart {
+public class ComponentViewer extends ViewPart implements IComponentListener {
 	private ComponentStateFilter componentFilter;
 	private TreeViewer treeViewer;
-	private ServiceListener refreshListener;
+	private Map<String, ComponentConfigurationDTO[]> scr2dtos;
 	private ServiceTracker<org.osgi.service.scr.api.StrippedServiceComponentRuntime, org.osgi.service.scr.api.StrippedServiceComponentRuntime> componentRuntimeTracker;
+	private ServiceRegistration<IComponentListener> registerService;
 
 	public ComponentViewer() {
+		scr2dtos = new HashMap<String, ComponentConfigurationDTO[]>();
 	}
 
 	@Override
@@ -65,43 +71,7 @@ public class ComponentViewer extends ViewPart {
 			treeViewer.setInput(allComponentConfigurationDTO);
 		}
 		getViewSite().setSelectionProvider(treeViewer);
-		
-//		Runnable runnable = new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				StrippedServiceComponentRuntime service = componentRuntimeTracker.getService();
-//				if(service != null) {
-//					Collection<ComponentConfigurationDTO> allComponentConfigurationDTO = service.getAllComponentConfigurationDTO();
-//					treeViewer.setInput(allComponentConfigurationDTO);
-//				}
-//			}
-//		};
-//		ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(1);
-//		scheduledThreadPool.scheduleAtFixedRate(runnable, 0, 3, TimeUnit.SECONDS);
-//		getViewSite().getActionBars().getToolBarManager()
-//		BundleContext bundleContext = updateTreeViewerContents();
-//		refreshListener = new ServiceListener() {
-//			
-//			private long lastUpdate = System.currentTimeMillis();
-//
-//			@Override
-//			public void serviceChanged(ServiceEvent event) {
-//				long currentTime = System.currentTimeMillis();
-//				if((currentTime - lastUpdate) > 500) {
-//					Display.getDefault().asyncExec(new Runnable() {
-//						
-//						@Override
-//						public void run() {
-//							updateTreeViewerContents();
-////							treeViewer.refresh();
-//						}
-//					});
-//					lastUpdate = currentTime;
-//				}
-//			}
-//		};
-//		bundleContext.addServiceListener(refreshListener);
+		registerService = bundleContext.registerService(IComponentListener.class, this, null);
 	}
 
 	private BundleContext updateTreeViewerContents() {
@@ -140,9 +110,37 @@ public class ComponentViewer extends ViewPart {
 		if(componentRuntimeTracker != null) {
 			componentRuntimeTracker.close();
 		}
-//		BundleContext bundleContext = DSUIActivator.getDefault().getBundle().getBundleContext();
-//		bundleContext.removeServiceListener(refreshListener);
+		registerService.unregister();
 		super.dispose();
+	}
+
+	@Override
+	public void newComponentRuntime(String componentRuntimeName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void disposedComponentRuntime(String componentRuntimeName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void receive(String componentRuntimeName, ComponentConfigurationDTO[] configurations) {
+		Display.getDefault().asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				treeViewer.setInput(configurations);
+			}
+		});
+	}
+
+	@Override
+	public void update(String componentRuntimeName, ComponentConfigurationDTO configurationDTO) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

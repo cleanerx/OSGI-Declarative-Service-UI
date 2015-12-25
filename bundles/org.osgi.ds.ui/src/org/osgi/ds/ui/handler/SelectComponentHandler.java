@@ -66,7 +66,7 @@ public class SelectComponentHandler extends AbstractHandler {
     //    ListSelectionDialog listSelectionDialog = new ListSelectionDialog(shell, allComponents, new ArrayContentProvider(), new ComponentLabelProvider(), "Select a component");
     if (filteredComponentsSelectionDialog.open() == Window.OK) {
       ComponentVisualizationView view = (ComponentVisualizationView) HandlerUtil.getActivePart(event);
-      view.buildGraph((Component) filteredComponentsSelectionDialog.getResult()[0]);
+//      view.buildGraph((Component) filteredComponentsSelectionDialog.getResult()[0]);
     }
     return null;
   }

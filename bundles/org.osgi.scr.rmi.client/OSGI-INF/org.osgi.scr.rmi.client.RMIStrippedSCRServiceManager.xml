@@ -3,6 +3,7 @@
 <scr:component name="org.osgi.scr.rmi.client.RMIStrippedSCRServiceManager" activate="activate" xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0">
     <service>
         <provide interface="org.osgi.service.scr.api.StrippedServiceComponentRuntime"/>
+        <provide interface="org.osgi.scr.rmi.api.IRMINotifier"/>
     </service>
     <implementation class="org.osgi.scr.rmi.client.RMIStrippedSCRServiceManager"/>
 </scr:component>

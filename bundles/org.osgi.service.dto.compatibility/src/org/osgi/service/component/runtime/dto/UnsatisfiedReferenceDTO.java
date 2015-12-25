@@ -19,7 +19,6 @@ package org.osgi.service.component.runtime.dto;
 import java.io.Serializable;
 
 import org.osgi.dto.DTO;
-import org.osgi.framework.dto.ServiceReferenceDTO;
 
 /**
  * A representation of an unsatisfied reference.

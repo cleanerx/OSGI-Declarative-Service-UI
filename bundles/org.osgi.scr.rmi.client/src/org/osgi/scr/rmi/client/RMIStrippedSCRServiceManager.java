@@ -19,18 +19,24 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.Collection;
 
 import org.osgi.framework.Bundle;
+import org.osgi.scr.rmi.api.IRMINotifier;
 import org.osgi.scr.rmi.api.IRMIServiceSerializer;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 import org.osgi.service.scr.api.StrippedServiceComponentRuntime;
 
 @Component
-public class RMIStrippedSCRServiceManager implements StrippedServiceComponentRuntime {
+public class RMIStrippedSCRServiceManager implements StrippedServiceComponentRuntime, IRMINotifier {
 
 	private IRMIServiceSerializer serializer;
 
@@ -82,5 +88,36 @@ public class RMIStrippedSCRServiceManager implements StrippedServiceComponentRun
 		}
 		return null;
 	}
+
+	@Override
+	public void newComponentRuntimeRMI(String componentRuntimeName) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void disposedComponentRuntimeRMI(String componentRuntimeName) throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void receiveRMI(String componentRuntimeName, Collection<ComponentConfigurationDTO> configurations)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateRMI(String componentRuntimeName, ComponentConfigurationDTO configurationDTO)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+//	@Reference(policy = ReferencePolicy.DYNAMIC, cardinality = ReferenceCardinality.OPTIONAL)
+//	public void bind(I) {
+//
+//	}
 
 }
