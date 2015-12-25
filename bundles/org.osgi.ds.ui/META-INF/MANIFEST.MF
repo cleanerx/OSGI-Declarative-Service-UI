@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Declarative Services UI
-Bundle-SymbolicName: org.osgi.ds.ui;singleton:=true
+Bundle-SymbolicName: com.kuebler.osgi.ds.ui;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.osgi.ds.ui.DSUIActivator
 Require-Bundle: org.eclipse.ui,
