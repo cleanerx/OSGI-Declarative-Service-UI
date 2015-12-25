@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: SCR RMI Client
-Bundle-SymbolicName: org.osgi.scr.rmi.client
+Bundle-SymbolicName: com.kuebler.osgi.scr.rmi.remote
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.osgi.scr.rmi.client.RMIClientActivator
 Require-Bundle: org.eclipse.ui,

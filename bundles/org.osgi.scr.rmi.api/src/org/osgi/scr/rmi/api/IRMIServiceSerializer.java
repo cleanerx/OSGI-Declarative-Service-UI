@@ -23,6 +23,9 @@ import org.osgi.framework.Bundle;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 
+/**
+ * Remote abstraction
+ */
 public interface IRMIServiceSerializer extends Remote {
 
 	Collection<ComponentConfigurationDTO> getComponentConfigurationDTOsRMI(ComponentDescriptionDTO arg0) throws RemoteException;

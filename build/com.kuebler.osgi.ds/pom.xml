@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.kuebler.osgi.ds</groupId>
+  <artifactId>com.kuebler.osgi.ds</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Declarative Services</name>
+  <modules>
+  	
+  	<module>../../bundles/com.kuebler.osgi.ds.ui</module>
+  	<module>../../bundles/com.kuebler.osgi.scr.rmi.api</module>
+  	<module>../../features/com.kuebler.osgi.ds.ui.feature</module>
+  </modules>
+  
+  <properties>
+		<tycho-version>0.24.0</tycho-version>
+	</properties>
+	
+		<repositories>
+		<repository>
+			<id>eclipse-mars</id>
+			<url>http://download.eclipse.org/releases/mars</url>
+			<layout>p2</layout>
+		</repository>
+	</repositories>
+	
+	<build>
+		<plugins>
+
+			<!-- plugin> <groupId>org.eclipse.tycho</groupId> <artifactId>target-platform-configuration</artifactId> 
+				<version>${tycho-version}</version> <configuration> <target> <artifact> <groupId>com.wuetherich.osgi.ds</groupId> 
+				<artifactId>com.wuetherich.osgi.ds.annotations.target</artifactId> <version>${project.version}</version> 
+				</artifact> </target> </configuration> </plugin -->
+
+			<plugin>
+				<!-- enable tycho build extension -->
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+
+			<!-- enable source bundle generation -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

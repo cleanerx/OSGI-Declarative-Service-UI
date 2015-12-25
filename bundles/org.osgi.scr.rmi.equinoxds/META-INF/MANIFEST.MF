@@ -18,6 +18,4 @@ Import-Package: org.apache.felix.scr;version="1.6.0",
  org.osgi.service.component.runtime.dto;version="1.3.0",
  org.osgi.service.scr.api
 Bundle-ActivationPolicy: lazy
-Service-Component: OSGI-INF/org.osgi.scr.rmi.RMISCRSerializer.xml,
- OSGI-INF/org.osgi.scr.rmi.XXX.xml,
- OSGI-INF/org.osgi.scr.rmi.YYY.xml
+Service-Component: OSGI-INF/org.osgi.scr.rmi.RMISCRSerializer.xml

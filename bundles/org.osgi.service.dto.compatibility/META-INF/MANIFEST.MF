@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: OSGI DS DTO Compatibility
-Bundle-SymbolicName: org.osgi.service.dto.compatibility
+Bundle-SymbolicName: com.kuebler.osgi.service.dto.compatibility
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
  JavaSE-1.7,
