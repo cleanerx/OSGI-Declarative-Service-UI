@@ -1,3 +1,0 @@
-language: java
-
-script: "mvn clean install -PuploadRepo -s travis-mvn-settings.xml -f build/com.kuebler.osgi.ds/pom.xml"
