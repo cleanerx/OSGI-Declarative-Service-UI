@@ -8,8 +8,8 @@
   <modules>
   	
   	<module>../../bundles/com.kuebler.osgi.ds.ui</module>
-  	<module>../../bundles/com.kuebler.osgi.scr.rmi.api</module>
-  	<module>../../features/com.kuebler.osgi.ds.ui.feature</module>
+ <!-- 	<module>../../bundles/com.kuebler.osgi.scr.rmi.api</module>
+  	<module>../../features/com.kuebler.osgi.ds.ui.feature</module> --> 
   </modules>
   
   <properties>
