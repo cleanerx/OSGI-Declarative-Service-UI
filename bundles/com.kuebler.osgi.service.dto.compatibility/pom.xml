@@ -8,7 +8,7 @@
   	<relativePath>../../build/com.kuebler.osgi.ds/pom.xml</relativePath>
   </parent>
   
-  <artifactId>org.osgi.service.dto.compatibility</artifactId>
+  <artifactId>com.kuebler.osgi.service.dto.compatibility</artifactId>
   <packaging>eclipse-plugin</packaging>
   
 </project>
