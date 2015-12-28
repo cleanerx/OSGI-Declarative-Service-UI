@@ -19,105 +19,60 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.Collection;
 
-import org.osgi.framework.Bundle;
-import org.osgi.scr.rmi.api.IRMINotifier;
 import org.osgi.scr.rmi.api.IRMIServiceSerializer;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ReferenceCardinality;
-import org.osgi.service.component.annotations.ReferencePolicy;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
-import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 import org.osgi.service.scr.api.StrippedServiceComponentRuntime;
 
 @Component
-public class RMIStrippedSCRServiceManager implements StrippedServiceComponentRuntime, IRMINotifier {
+public class RMIStrippedSCRServiceManager implements StrippedServiceComponentRuntime {
 
 	private IRMIServiceSerializer serializer;
 
 	@Activate
-	public void activate() throws MalformedURLException, RemoteException, NotBoundException {
-		serializer = (IRMIServiceSerializer) Naming.lookup("//localhost/Server");
-	}
-	
-	@Override
-	public Collection<ComponentConfigurationDTO> getComponentConfigurationDTOs(ComponentDescriptionDTO arg0) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+  public void activate() {
+    Thread thread = new Thread(new Runnable() {
 
-	@Override
-	public ComponentDescriptionDTO getComponentDescriptionDTO(Bundle arg0, String arg1) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Collection<ComponentDescriptionDTO> getComponentDescriptionDTOs(Bundle[] arg0) {
-		try {
-			return serializer.getAllComponentDescriptionDTORMI();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public Collection<ComponentDescriptionDTO> getAllComponentDescriptionDTO() {
-		try {
-			return serializer.getAllComponentDescriptionDTORMI();
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-		return null;
+      @Override
+      public void run() {
+        while (serializer == null) {
+          try {
+            serializer = (IRMIServiceSerializer) Naming.lookup("//localhost/Server");
+          } catch (MalformedURLException e) {
+            // throw
+          } catch (RemoteException e) {
+            e.printStackTrace();
+            //
+          } catch (NotBoundException e) {
+            //
+          }
+          if (serializer == null) {
+            try {
+              Thread.sleep(500);
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            }
+          }
+        }
+      }
+    });
+    thread.start();
 	}
 
 	@Override
 	public Collection<ComponentConfigurationDTO> getAllComponentConfigurationDTO() {
-		try {
-			return serializer.getAllComponentConfigurationDTORMI();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    if (serializer != null) {
+      try {
+        return serializer.getAllComponentConfigurationDTORMI();
+      } catch (RemoteException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
 		return null;
 	}
-
-	@Override
-	public void newComponentRuntimeRMI(String componentRuntimeName) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void disposedComponentRuntimeRMI(String componentRuntimeName) throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void receiveRMI(String componentRuntimeName, Collection<ComponentConfigurationDTO> configurations)
-			throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void updateRMI(String componentRuntimeName, ComponentConfigurationDTO configurationDTO)
-			throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-	
-//	@Reference(policy = ReferencePolicy.DYNAMIC, cardinality = ReferenceCardinality.OPTIONAL)
-//	public void bind(I) {
-//
-//	}
 
 }

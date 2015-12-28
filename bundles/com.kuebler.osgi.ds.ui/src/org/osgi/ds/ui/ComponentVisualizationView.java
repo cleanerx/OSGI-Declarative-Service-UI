@@ -219,7 +219,7 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
 	                        graphConnection.setLineStyle(Graphics.LINE_SOLID);
 	                        for (ReferenceDTO referenceDTO : inboundComponent.description.references) {
 	                        	if(referenceDTO.name == reference.name) {
-//	                        		setConnectionText(referenceDTO, graphConnection);
+                        setConnectionText(referenceDTO, graphConnection);
 	                        	}
 							}
 	                	}
@@ -229,63 +229,63 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
             }
           }
           UnsatisfiedReferenceDTO[] unsatisfiedReferences = inboundComponent.unsatisfiedReferences;
-//          if (requiredReferences != null) {
-//            for (UnsatisfiedReferenceDTO reference : unsatisfiedReferences) {
-//              ServiceReferenceDTO[] boundServiceReferences = reference.targetServices;
-//              if (boundServiceReferences != null) {
-//                for (ServiceReferenceDTO serviceReference2 : boundServiceReferences) {
-//                	Map<String, Object> properties = serviceReference2.properties;
-//                	if(properties.get("component.id") != null) {
-//	                	if(componentX.id == (Long)properties.get("component.id")) {
-//	                        createGraphNode4Component(nodes, inboundComponent);
-//	                        GraphConnection graphConnection = new GraphConnection(graph, ZestStyles.CONNECTIONS_DIRECTED, nodes.get(componentX), nodes.get(inboundComponent));
-//	                        graphConnection.setLineStyle(Graphics.LINE_SOLID);
-//	                        for (ReferenceDTO referenceDTO : inboundComponent.description.references) {
-//	                        	if(referenceDTO.name == reference.name) {
-//	                        		setConnectionText(referenceDTO, graphConnection);
-//	                        	}
-//							}
-//	                	}
-//                	}
-//                }
-//              }
-//            }
-//          }
+        //          if (requiredReferences != null) {
+        //            for (UnsatisfiedReferenceDTO reference : unsatisfiedReferences) {
+        //              ServiceReferenceDTO[] boundServiceReferences = reference.targetServices;
+        //              if (boundServiceReferences != null) {
+        //                for (ServiceReferenceDTO serviceReference2 : boundServiceReferences) {
+        //                	Map<String, Object> properties = serviceReference2.properties;
+        //                	if(properties.get("component.id") != null) {
+        //	                	if(componentX.id == (Long)properties.get("component.id")) {
+        //	                        createGraphNode4Component(nodes, inboundComponent);
+        //	                        GraphConnection graphConnection = new GraphConnection(graph, ZestStyles.CONNECTIONS_DIRECTED, nodes.get(componentX), nodes.get(inboundComponent));
+        //	                        graphConnection.setLineStyle(Graphics.LINE_SOLID);
+        //	                        for (ReferenceDTO referenceDTO : inboundComponent.description.references) {
+        //	                        	if(referenceDTO.name == reference.name) {
+        //	                        		setConnectionText(referenceDTO, graphConnection);
+        //	                        	}
+        //							}
+        //	                	}
+        //                	}
+        //                }
+        //              }
+        //            }
+        //          }
         }
 
-        if(componentX.satisfiedReferences != null) {
-        	for(SatisfiedReferenceDTO reference : componentX.satisfiedReferences) {
-        		ServiceReferenceDTO[] boundServiceReferences = reference.boundServices;
-        		if (boundServiceReferences != null) {
-        			for (ServiceReferenceDTO serviceReference2 : boundServiceReferences) {
-        				Map<String, Object> properties = serviceReference2.properties;
-        				boolean foundComponent = false;
-        				if(properties.get("component.id") != null) {
-        					for (ComponentConfigurationDTO inboundComponent : allComponents) {
-        						if(inboundComponent.id == (Long)properties.get("component.id")) {
-        							createGraphNode4Component(nodes, inboundComponent);
-        							GraphConnection graphConnection = new GraphConnection(graph, ZestStyles.CONNECTIONS_DIRECTED, nodes.get(inboundComponent),nodes.get(componentX));
-        							graphConnection.setLineStyle(Graphics.LINE_SOLID);
-        							foundComponent = true;
-        							for (ReferenceDTO referenceDTO : inboundComponent.description.references) {
-        								if(referenceDTO.name == reference.name) {
-        									setConnectionText(referenceDTO, graphConnection);
-        								}
-        							}
-        						}
-        					}
-        				}
-        				// must be a service
-        				if(!foundComponent) {
-                          GraphNode graphNodeX = new GraphNode(graph, SWT.NONE, serviceReference2.toString());
-                          graphNodeX.setBackgroundColor(ColorConstants.lightGray);
-                          GraphConnection graphConnection = new GraphConnection(graph, ZestStyles.CONNECTIONS_DIRECTED, nodes.get(componentX), graphNodeX);
-                          graphConnection.setLineStyle(Graphics.LINE_DASH);
-//                          setConnectionText(reference, graphConnection);
-        				}
-        			}
-        		}
-        	}
+      //        if(componentX.satisfiedReferences != null) {
+      //        	for(SatisfiedReferenceDTO reference : componentX.satisfiedReferences) {
+      //        		ServiceReferenceDTO[] boundServiceReferences = reference.boundServices;
+      //        		if (boundServiceReferences != null) {
+      //        			for (ServiceReferenceDTO serviceReference2 : boundServiceReferences) {
+      //        				Map<String, Object> properties = serviceReference2.properties;
+      //        				boolean foundComponent = false;
+      //        				if(properties.get("component.id") != null) {
+      //        					for (ComponentConfigurationDTO inboundComponent : allComponents) {
+      //        						if(inboundComponent.id == (Long)properties.get("component.id")) {
+      //        							createGraphNode4Component(nodes, inboundComponent);
+      //        							GraphConnection graphConnection = new GraphConnection(graph, ZestStyles.CONNECTIONS_DIRECTED, nodes.get(inboundComponent),nodes.get(componentX));
+      //        							graphConnection.setLineStyle(Graphics.LINE_SOLID);
+      //        							foundComponent = true;
+      //        							for (ReferenceDTO referenceDTO : inboundComponent.description.references) {
+      //        								if(referenceDTO.name == reference.name) {
+      //        									setConnectionText(referenceDTO, graphConnection);
+      //        								}
+      //        							}
+      //        						}
+      //        					}
+      //        				}
+      //        				// must be a service
+      //        				if(!foundComponent) {
+      //                          GraphNode graphNodeX = new GraphNode(graph, SWT.NONE, serviceReference2.toString());
+      //                          graphNodeX.setBackgroundColor(ColorConstants.lightGray);
+      //                          GraphConnection graphConnection = new GraphConnection(graph, ZestStyles.CONNECTIONS_DIRECTED, nodes.get(componentX), graphNodeX);
+      //                          graphConnection.setLineStyle(Graphics.LINE_DASH);
+      ////                          setConnectionText(reference, graphConnection);
+      //        				}
+      //        			}
+      //        		}
+      //        	}
 //            if(componentX.unsatisfiedReferences != null) {
 //            	for(UnsatisfiedReferenceDTO reference : componentX.unsatisfiedReferences ) {
 //            		ServiceReferenceDTO[] boundServiceReferences = reference.targetServices;
@@ -312,7 +312,7 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
 //    				}
 //				}
 //			}
-//        }
+      //        }
 
 //        for (ComponentConfigurationDTO inboundComponent : allComponents) {
 //            SatisfiedReferenceDTO[] requiredReferences = inboundComponent.satisfiedReferences;
@@ -435,7 +435,7 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
 //          }
 //        }
 //
-      }
+      //      }
       graph.setScrollBarVisibility(FigureCanvas.ALWAYS);
       //      graph.setLayoutAlgorithm(new CompositeLayoutAlgorithm(LayoutStyles.NO_LAYOUT_NODE_RESIZING, new LayoutAlgorithm[] {
       //                                                                                                                         new DirectedGraphLayoutAlgorithm(LayoutStyles.NO_LAYOUT_NODE_RESIZING),

@@ -25,9 +25,9 @@ public class ComponentStateFilter extends ViewerFilter {
 
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
-//		if(true) {
-//			return true;
-//		}
+    //    if (true) {
+    //      return true;
+    //    }
 		if(element instanceof ComponentConfigurationDTO) {
 			ComponentConfigurationDTO componentConfigurationDTO = (ComponentConfigurationDTO) element;
 //			Component component = (Component) element;

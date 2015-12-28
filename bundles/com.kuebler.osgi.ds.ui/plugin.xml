@@ -21,20 +21,24 @@
 <extension
       point="org.eclipse.ui.handlers">
    <handler
-         class="org.osgi.ds.ui.handler.FilterDisabledComponentsHandler"
-         commandId="org.osgi.ds.ui.showdisabled">
+         class="org.osgi.ds.ui.handler.FilterConfigurationUnsatisfiedComponentsHandler"
+         commandId="org.osgi.ds.ui.showunsatisfiedconfig">
    </handler>
    <handler
-         class="org.osgi.ds.ui.handler.FilterEnablingComponentsHandler"
-         commandId="org.osgi.ds.ui.showenabling">
-   </handler>
-   <handler
-         class="org.osgi.ds.ui.handler.FilterUnsatisfiedComponentsHandler"
+         class="org.osgi.ds.ui.handler.FilterUnsatisfiedReferenceComponentsHandler"
          commandId="org.osgi.ds.ui.showunsatisfied">
    </handler>
    <handler
-         class="org.osgi.ds.ui.handler.FilterActivatingComponentsHandler"
-         commandId="org.osgi.ds.ui.showactivating">
+         class="org.osgi.ds.ui.handler.FilterSatisfiedComponentsHandler"
+         commandId="org.osgi.ds.ui.showsatisfied">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.FilterActiveComponentsHandler"
+         commandId="org.osgi.ds.ui.showactive">
+   </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.AddConnectionHandler"
+         commandId="com.kuebler.osgi.ds.ui.addconnection">
    </handler>
  
 </extension>
@@ -45,23 +49,20 @@
          id="org.osgi.ds.ui.selectcomponent"
          name="Select Component">
    </command>
-   <command
-         description="Shows the enabling components"
-         id="org.osgi.ds.ui.showenabling"
-         name="Show Enabling">
-      <state
-            id="org.osgi.ds.ui.enabling.state">
-      </state>
+<!--   <command
+         description="Shows the unsatisfied configation components"
+         id="org.osgi.ds.ui.showunsatisfiedconfigx"
+         name="Show Unsatisfied Configuration">
    </command>
    <command
          description="Shows the unsatisfied components"
          id="org.osgi.ds.ui.showunsatisfied"
-         name="Show Unsatisfied">
+         name="Show Unsatisfied Reference">
    </command>
    <command
-         description="Shows the activating components"
-         id="org.osgi.ds.ui.showactivating"
-         name="Show Activating">
+         description="Shows the satisfied but not active components"
+         id="org.osgi.ds.ui.showsatisfied"
+         name="Show Satisfied">
    </command>
    <command
          description="Shows the active components"
@@ -71,7 +72,7 @@
    <command
          id="org.osgi.ds.ui.selectscr"
          name="name">
-   </command>
+   </command>-->
 
 </extension>
 <extension
@@ -79,22 +80,22 @@
    <menuContribution
          locationURI="menu:org.osgi.ds.ui.componentlist?after=additions">
       <command
-            commandId="org.osgi.ds.ui.showdisabled"
+            commandId="org.osgi.ds.ui.showunsatisfiedconfig"
             label="Show Unsatisfied Configuration"
             style="toggle">
       </command>
       <command
-            commandId="org.osgi.ds.ui.showenabling"
+            commandId="org.osgi.ds.ui.showunsatisfied"
             label="Show Unsatisfied Reference"
             style="toggle">
       </command>
       <command
-            commandId="org.osgi.ds.ui.showunsatisfied"
+            commandId="org.osgi.ds.ui.showsatisfied"
             label="Show Satisfied"
             style="toggle">
       </command>
       <command
-            commandId="org.osgi.ds.ui.showactivating"
+            commandId="org.osgi.ds.ui.showactive"
             label="Show Active"
             style="toggle">
       </command>
@@ -106,6 +107,11 @@
       <command
             commandId="org.osgi.ds.ui.selectscr"
             icon="res/providedService.png"
+            style="push">
+      </command>
+      <command
+            commandId="com.kuebler.osgi.ds.ui.addconnection"
+            icon="res/satisfied.png"
             style="push">
       </command>
    </menuContribution>

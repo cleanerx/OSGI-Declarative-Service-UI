@@ -15,12 +15,12 @@
  */
 package org.osgi.ds.ui.handler;
 
-import org.apache.felix.scr.Component;
+import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 
-public class FilterDeactivatingComponentsHandler extends AbstractComponentHandler {
+public class FilterSatisfiedComponentsHandler extends AbstractComponentHandler {
 
-	public FilterDeactivatingComponentsHandler() {
-		super(Component.STATE_DEACTIVATING);
+	public FilterSatisfiedComponentsHandler() {
+    super(ComponentConfigurationDTO.SATISFIED);
 	}
 
 }

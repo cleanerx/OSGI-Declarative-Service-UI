@@ -17,20 +17,18 @@ package org.osgi.service.scr.api;
 
 import java.util.Collection;
 
-import org.osgi.framework.Bundle;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
-import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 
 public interface StrippedServiceComponentRuntime  {
 
-	Collection<ComponentConfigurationDTO> getComponentConfigurationDTOs(ComponentDescriptionDTO arg0) ;
-
-	ComponentDescriptionDTO getComponentDescriptionDTO(Bundle arg0, String arg1) ;
-
-	Collection<ComponentDescriptionDTO> getComponentDescriptionDTOs(Bundle[] arg0) ;
-
-	Collection<ComponentDescriptionDTO> getAllComponentDescriptionDTO();
-
+  //	Collection<ComponentConfigurationDTO> getComponentConfigurationDTOs(ComponentDescriptionDTO arg0) ;
+  //
+  //	ComponentDescriptionDTO getComponentDescriptionDTO(Bundle arg0, String arg1) ;
+  //
+  //	Collection<ComponentDescriptionDTO> getComponentDescriptionDTOs(Bundle[] arg0) ;
+  //
+  //	Collection<ComponentDescriptionDTO> getAllComponentDescriptionDTO();
+  //
 	Collection<ComponentConfigurationDTO> getAllComponentConfigurationDTO();
 
 }

@@ -19,22 +19,20 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Collection;
 
-import org.osgi.framework.Bundle;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
-import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 
 /**
  * Remote abstraction
  */
 public interface IRMIServiceSerializer extends Remote {
 
-	Collection<ComponentConfigurationDTO> getComponentConfigurationDTOsRMI(ComponentDescriptionDTO arg0) throws RemoteException;
-
-	ComponentDescriptionDTO getComponentDescriptionDTORMI(Bundle arg0, String arg1)  throws RemoteException;
-
-	Collection<ComponentDescriptionDTO> getComponentDescriptionDTOsRMI(Bundle[] arg0) throws RemoteException;
-
-	Collection<ComponentDescriptionDTO> getAllComponentDescriptionDTORMI() throws RemoteException;
+  //	Collection<ComponentConfigurationDTO> getComponentConfigurationDTOsRMI(ComponentDescriptionDTO arg0) throws RemoteException;
+  //
+  //	ComponentDescriptionDTO getComponentDescriptionDTORMI(Bundle arg0, String arg1)  throws RemoteException;
+  //
+  //	Collection<ComponentDescriptionDTO> getComponentDescriptionDTOsRMI(Bundle[] arg0) throws RemoteException;
+  //
+  //	Collection<ComponentDescriptionDTO> getAllComponentDescriptionDTORMI() throws RemoteException;
 
 	Collection<ComponentConfigurationDTO> getAllComponentConfigurationDTORMI() throws RemoteException;
 

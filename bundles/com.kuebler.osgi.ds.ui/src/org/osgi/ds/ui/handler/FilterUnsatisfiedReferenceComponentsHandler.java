@@ -15,12 +15,12 @@
  */
 package org.osgi.ds.ui.handler;
 
-import org.apache.felix.scr.Component;
+import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 
-public class FilterFactoryComponentsHandler extends AbstractComponentHandler {
+public class FilterUnsatisfiedReferenceComponentsHandler extends AbstractComponentHandler {
 
-	public FilterFactoryComponentsHandler() {
-		super(Component.STATE_FACTORY);
+	public FilterUnsatisfiedReferenceComponentsHandler() {
+    super(ComponentConfigurationDTO.UNSATISFIED_REFERENCE);
 	}
 
 }
