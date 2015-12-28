@@ -50,7 +50,7 @@ public class ComponentViewer extends ViewPart implements IComponentListener {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		
+
 		treeViewer = new TreeViewer(parent, SWT.BORDER);
 		Tree tree = treeViewer.getTree();
 		treeViewer.setContentProvider(new ComponentContentProvider());
@@ -90,7 +90,7 @@ public class ComponentViewer extends ViewPart implements IComponentListener {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	public void setFilterStates(int filter) {
 		componentFilter.setFilter(filter);
 		StrippedServiceComponentRuntime service = componentRuntimeTracker.getService();
@@ -100,11 +100,11 @@ public class ComponentViewer extends ViewPart implements IComponentListener {
 		}
 		treeViewer.refresh();
 	}
-	
+
 	public int getFilterState() {
 		return componentFilter.getFilter();
 	}
-	
+
 	@Override
 	public void dispose() {
 		if(componentRuntimeTracker != null) {
@@ -117,19 +117,19 @@ public class ComponentViewer extends ViewPart implements IComponentListener {
 	@Override
 	public void newComponentRuntime(String componentRuntimeName) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void disposedComponentRuntime(String componentRuntimeName) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void receive(String componentRuntimeName, ComponentConfigurationDTO[] configurations) {
+  public void receive(String componentRuntimeName, final ComponentConfigurationDTO[] configurations) {
 		Display.getDefault().asyncExec(new Runnable() {
-			
+
 			@Override
 			public void run() {
 				treeViewer.setInput(configurations);
@@ -140,7 +140,7 @@ public class ComponentViewer extends ViewPart implements IComponentListener {
 	@Override
 	public void update(String componentRuntimeName, ComponentConfigurationDTO configurationDTO) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

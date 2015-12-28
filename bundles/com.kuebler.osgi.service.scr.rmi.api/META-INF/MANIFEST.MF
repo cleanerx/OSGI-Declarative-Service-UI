@@ -1,10 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: RMI SCR API
-Bundle-SymbolicName: com.kuebler.osgi.scr.rmi.api
+Bundle-SymbolicName: com.kuebler.osgi.service.scr.rmi.api
 Bundle-Version: 0.0.1.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: org.osgi.framework;version="1.8.0",
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8,
+ JavaSE-1.6,
+ JavaSE-1.7
+Import-Package: org.osgi.framework,
  org.osgi.service.component.runtime.dto;version="1.3.0",
  org.osgi.service.scr.api
 Export-Package: org.osgi.scr.rmi.api;version="1.0.0"

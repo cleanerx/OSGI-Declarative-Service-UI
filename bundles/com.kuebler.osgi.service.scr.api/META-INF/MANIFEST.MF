@@ -3,7 +3,9 @@ Bundle-ManifestVersion: 2
 Bundle-Name: SCR Api
 Bundle-SymbolicName: com.kuebler.osgi.service.scr.api
 Bundle-Version: 0.0.1.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: org.osgi.framework;version="1.8.0",
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
+ JavaSE-1.7,
+ JavaSE-1.8
+Import-Package: org.osgi.framework,
  org.osgi.service.component.runtime.dto
 Export-Package: org.osgi.service.scr.api;version="1.0.0";uses:="org.osgi.framework,org.osgi.service.component.runtime.dto"

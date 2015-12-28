@@ -15,15 +15,9 @@
  */
 package org.osgi.ds.ui;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -31,19 +25,12 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.felix.scr.Component;
-import org.apache.felix.scr.Reference;
-import org.apache.felix.scr.ScrService;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.FigureCanvas;
 import org.eclipse.draw2d.Graphics;
 import org.eclipse.draw2d.Label;
-import org.eclipse.equinox.internal.ds.model.ServiceComponent;
-import org.eclipse.equinox.internal.ds.model.ServiceComponentProp;
-import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.window.Window;
-import org.eclipse.osgi.internal.serviceregistry.ServiceReferenceImpl;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -51,7 +38,6 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.part.ViewPart;
@@ -61,9 +47,7 @@ import org.eclipse.zest.core.widgets.GraphNode;
 import org.eclipse.zest.core.widgets.ZestStyles;
 import org.eclipse.zest.layouts.LayoutStyles;
 import org.eclipse.zest.layouts.algorithms.RadialLayoutAlgorithm;
-import org.osgi.ds.ui.dialog.FilteredComponentsSelectionDialog;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 import org.osgi.service.component.runtime.dto.ReferenceDTO;
@@ -113,7 +97,7 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
 				if (e.item instanceof GraphNode) {
 					GraphNode graphNode = (GraphNode) e.item;
 					if (graphNode.getData() instanceof ComponentConfigurationDTO) {
-						ComponentConfigurationDTO componentConfigurationDTO = (ComponentConfigurationDTO) graphNode
+            final ComponentConfigurationDTO componentConfigurationDTO = (ComponentConfigurationDTO) graphNode
 								.getData();
 						Display.getDefault().asyncExec(new Runnable() {
 
@@ -268,7 +252,7 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
 //            }
 //          }
         }
-        
+
         if(componentX.satisfiedReferences != null) {
         	for(SatisfiedReferenceDTO reference : componentX.satisfiedReferences) {
         		ServiceReferenceDTO[] boundServiceReferences = reference.boundServices;
@@ -543,7 +527,7 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
 	public void setFocus() {
 		//
 	}
-	
+
 
 	/**
 	 * @see org.eclipse.ui.ISelectionListener#selectionChanged(org.eclipse.ui.IWorkbenchPart,

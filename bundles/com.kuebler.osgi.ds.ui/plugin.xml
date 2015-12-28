@@ -77,16 +77,6 @@
 <extension
       point="org.eclipse.ui.menus">
    <menuContribution
-         allPopups="false"
-         locationURI="toolbar:org.osgi.ds.ui.componentview?after=additions">
-      <command
-            commandId="org.osgi.ds.ui.selectcomponent"
-            icon="res/database_go_16x16.png"
-            label="Select Component"
-            style="push">
-      </command>
-   </menuContribution>
-   <menuContribution
          locationURI="menu:org.osgi.ds.ui.componentlist?after=additions">
       <command
             commandId="org.osgi.ds.ui.showdisabled"

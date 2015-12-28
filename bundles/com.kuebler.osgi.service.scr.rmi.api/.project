@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>com.kuebler.osgi.scr.rmi.api</name>
+	<name>com.kuebler.osgi.service.scr.rmi.api</name>
 	<comment></comment>
 	<projects>
 	</projects>

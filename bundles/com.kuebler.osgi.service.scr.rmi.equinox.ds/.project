@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>com.kuebker.osgi.scr.rmi.equinoxds</name>
+	<name>com.kuebker.osgi.service.scr.rmi.equinoxds</name>
 	<comment></comment>
 	<projects>
 	</projects>
