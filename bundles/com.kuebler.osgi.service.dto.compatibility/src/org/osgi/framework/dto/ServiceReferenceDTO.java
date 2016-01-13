@@ -1,4 +1,4 @@
-package org.osgi.service.component.runtime.dto;
+package org.osgi.framework.dto;
 
 /*
  * Copyright (c) OSGi Alliance (2012, 2014). All Rights Reserved.
@@ -16,14 +16,13 @@ package org.osgi.service.component.runtime.dto;
  * limitations under the License.
  */
 
-import java.io.Serializable;
 import java.util.Map;
+
 import org.osgi.dto.DTO;
-import org.osgi.framework.dto.FrameworkDTO;
 
 /**
  * Data Transfer Object for a ServiceReference.
- * 
+ *
  * <p>
  * {@code ServiceReferenceDTO}s for all registered services can be obtained from
  * a {@link FrameworkDTO}. An installed Bundle can be adapted to provide a
@@ -31,43 +30,43 @@ import org.osgi.framework.dto.FrameworkDTO;
  * {@code ServiceReferenceDTO} obtained from a framework must convert service
  * property values which are not valid value types for DTOs to type
  * {@code String} using {@code String.valueOf(Object)}.
- * 
+ *
  * @author $Id: 2c70b84f28c41fb51c488cb03950a46188ea209f $
  * @NotThreadSafe
  */
-public class ServiceReferenceDTO extends DTO implements Serializable {
+public class ServiceReferenceDTO extends DTO {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 303305334059719598L;
 
 	/**
 	 * The id of the service.
-	 * 
+	 *
 	 * Constants#SERVICE_ID
 	 */
     public long                id;
 
     /**
 	 * The id of the bundle that registered the service.
-	 * 
+	 *
 	 * ServiceReference#getBundle()
 	 */
     public long                bundle;
 
     /**
 	 * The properties for the service.
-	 * 
+	 *
 	 * The value type must be a numerical type, Boolean, String, DTO or an array
 	 * of any of the former.
-	 * 
+	 *
 	 * ServiceReference#getProperty(String)
 	 */
     public Map<String, Object> properties;
 
     /**
 	 * The ids of the bundles that are using the service.
-	 * 
+	 *
 	 * ServiceReference#getUsingBundles()
 	 */
     public long[]              usingBundles;

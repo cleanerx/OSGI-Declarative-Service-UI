@@ -1,12 +1,13 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Service Component Runtime RMI
-Bundle-SymbolicName: org.osgi.scr.rmi.equinox.ds
+Bundle-SymbolicName: com.kuebker.osgi.service.scr.rmi.equinoxds
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.osgi.scr.rmi.SCRRMIActivator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7,
  JavaSE-1.8
-Import-Package: org.apache.felix.scr;version="1.6.0",
+Import-Package: com.kuebler.osgi.service.dto.serial,
+ org.apache.felix.scr;version="1.6.0",
  org.eclipse.equinox.internal.ds,
  org.eclipse.equinox.internal.ds.model,
  org.osgi.dto;version="1.0.0",

@@ -21,6 +21,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Collection;
 
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.dto.ServiceReferenceDTO;
 import org.osgi.scr.rmi.api.IRMIServiceSerializer;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -32,8 +34,11 @@ public class RMIStrippedSCRServiceManager implements StrippedServiceComponentRun
 
 	private IRMIServiceSerializer serializer;
 
+  private BundleContext _bundleContext;
+
 	@Activate
-  public void activate() {
+  public void activate(BundleContext bundleContext) {
+    _bundleContext = bundleContext;
     Thread thread = new Thread(new Runnable() {
 
       @Override
@@ -63,7 +68,7 @@ public class RMIStrippedSCRServiceManager implements StrippedServiceComponentRun
 	}
 
 	@Override
-	public Collection<ComponentConfigurationDTO> getAllComponentConfigurationDTO() {
+  public Collection<ComponentConfigurationDTO> getAllComponentConfigurationDTO() {
     if (serializer != null) {
       try {
         return serializer.getAllComponentConfigurationDTORMI();
@@ -74,5 +79,21 @@ public class RMIStrippedSCRServiceManager implements StrippedServiceComponentRun
     }
 		return null;
 	}
+
+  /**
+   * @see org.osgi.service.scr.api.StrippedServiceComponentRuntime#getAllServiceReferenceDTO()
+   */
+  @Override
+  public Collection<ServiceReferenceDTO> getAllServiceReferenceDTO() {
+    if (serializer != null) {
+      try {
+        return serializer.getAllServiceReferenceDTORMI();
+      } catch (RemoteException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+    return null;
+  }
 
 }

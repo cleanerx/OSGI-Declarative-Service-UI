@@ -17,6 +17,7 @@ package org.osgi.service.scr.api;
 
 import java.util.Collection;
 
+import org.osgi.framework.dto.ServiceReferenceDTO;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 
 public interface StrippedServiceComponentRuntime  {
@@ -29,6 +30,8 @@ public interface StrippedServiceComponentRuntime  {
   //
   //	Collection<ComponentDescriptionDTO> getAllComponentDescriptionDTO();
   //
-	Collection<ComponentConfigurationDTO> getAllComponentConfigurationDTO();
+  Collection<ComponentConfigurationDTO> getAllComponentConfigurationDTO();
+
+  Collection<ServiceReferenceDTO> getAllServiceReferenceDTO();
 
 }

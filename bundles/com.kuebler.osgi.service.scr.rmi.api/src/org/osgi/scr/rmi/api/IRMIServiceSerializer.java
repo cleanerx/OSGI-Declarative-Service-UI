@@ -19,6 +19,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.Collection;
 
+import org.osgi.framework.dto.ServiceReferenceDTO;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 
 /**
@@ -34,6 +35,8 @@ public interface IRMIServiceSerializer extends Remote {
   //
   //	Collection<ComponentDescriptionDTO> getAllComponentDescriptionDTORMI() throws RemoteException;
 
-	Collection<ComponentConfigurationDTO> getAllComponentConfigurationDTORMI() throws RemoteException;
+  Collection<ComponentConfigurationDTO> getAllComponentConfigurationDTORMI() throws RemoteException;
+
+  Collection<ServiceReferenceDTO> getAllServiceReferenceDTORMI() throws RemoteException;
 
 }

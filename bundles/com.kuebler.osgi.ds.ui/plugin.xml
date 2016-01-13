@@ -7,14 +7,23 @@
             class="org.osgi.ds.ui.ComponentVisualizationView"
             icon="res/component.png"
             id="org.osgi.ds.ui.componentview"
-            name="Component View"
+            name="Component Dependencies"
             restorable="true">
       </view>
       <view
+            allowMultiple="true"
             class="org.osgi.ds.ui.ComponentViewer"
             icon="res/component.png"
             id="org.osgi.ds.ui.componentlist"
-            name="Component List"
+            name="Components"
+            restorable="true">
+      </view>
+      <view
+            allowMultiple="true"
+            class="org.osgi.ds.ui.ServiceViewer"
+            icon="res/satisfiedService.png"
+            id="com.kuebler.osgi.ds.ui.services"
+            name="Services"
             restorable="true">
       </view>
    </extension>
