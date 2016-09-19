@@ -15,6 +15,8 @@
  */
 package org.osgi.ds.ui;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -50,7 +52,9 @@ import org.eclipse.zest.layouts.algorithms.RadialLayoutAlgorithm;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.dto.ServiceReferenceDTO;
+import org.osgi.service.component.runtime.ServiceComponentRuntime;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 import org.osgi.service.component.runtime.dto.ReferenceDTO;
 import org.osgi.service.component.runtime.dto.SatisfiedReferenceDTO;
 import org.osgi.service.component.runtime.dto.UnsatisfiedReferenceDTO;
@@ -133,9 +137,9 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
     ComponentConfigurationDTO componentX = componentConfigurationDTO;
 
     BundleContext bundleContext = DSUIActivator.getDefault().getBundle().getBundleContext();
-    ServiceReference<StrippedServiceComponentRuntime> serviceReference = bundleContext.getServiceReference(StrippedServiceComponentRuntime.class);
+    ServiceReference<ServiceComponentRuntime> serviceReference = bundleContext.getServiceReference(ServiceComponentRuntime.class);
     try {
-      StrippedServiceComponentRuntime service = bundleContext.getService(serviceReference);
+    	ServiceComponentRuntime serviceComponentRuntime = bundleContext.getService(serviceReference);
 
       Composite parent = graph.getParent();
       Graph oldGraph = graph;
@@ -144,9 +148,13 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
       graph = new Graph(parent, SWT.NONE);
 
       Map<ComponentConfigurationDTO, GraphNode> nodes = new HashMap<>();
-
-      List<ComponentConfigurationDTO> allComponents = (List<ComponentConfigurationDTO>) service.getAllComponentConfigurationDTO();
-      Collections.sort(allComponents, new Comparator<ComponentConfigurationDTO>() {
+		Collection<ComponentDescriptionDTO> componentDescriptionDTOs = serviceComponentRuntime.getComponentDescriptionDTOs();
+		List<ComponentConfigurationDTO> componentConfigurationDTOs = new ArrayList<>();
+		for (ComponentDescriptionDTO componentDescriptionDTO : componentDescriptionDTOs) {
+			componentConfigurationDTOs.addAll(serviceComponentRuntime.getComponentConfigurationDTOs(componentDescriptionDTO));
+		}
+      
+      Collections.sort(componentConfigurationDTOs, new Comparator<ComponentConfigurationDTO>() {
 
         @Override
         public int compare(ComponentConfigurationDTO o1, ComponentConfigurationDTO o2) {
@@ -206,7 +214,7 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
       graphNode2.setTooltip(label);
       nodes.put(componentX, graphNode2);
 
-      for (ComponentConfigurationDTO inboundComponent : allComponents) {
+      for (ComponentConfigurationDTO inboundComponent : componentConfigurationDTOs) {
         SatisfiedReferenceDTO[] requiredReferences = inboundComponent.satisfiedReferences;
         if (requiredReferences != null) {
           for (SatisfiedReferenceDTO reference : requiredReferences) {
@@ -263,7 +271,7 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
               				Map<String, Object> properties = serviceReference2.properties;
               				boolean foundComponent = false;
               				if(properties.get("component.id") != null) {
-              					for (ComponentConfigurationDTO inboundComponent : allComponents) {
+              					for (ComponentConfigurationDTO inboundComponent : componentConfigurationDTOs) {
               						if(inboundComponent.id == (Long)properties.get("component.id")) {
               							createGraphNode4Component(nodes, inboundComponent);
               							GraphConnection graphConnection = new GraphConnection(graph, ZestStyles.CONNECTIONS_DIRECTED, nodes.get(inboundComponent),nodes.get(componentX));

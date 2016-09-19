@@ -39,16 +39,16 @@ public abstract class AbstractComponentHandler extends AbstractHandler {
 	    MenuItem item = (MenuItem) selEvent.widget;
 	    boolean selection = item.getSelection();
 		
-		if(workbenchPart instanceof ComponentViewer) {
-			ComponentViewer componentViewer = (ComponentViewer) workbenchPart;
-			if(selection) {
-				componentViewer.setFilterStates(componentViewer.getFilterState() | componentState);
-			} else {
-				int filterState = componentViewer.getFilterState();
-				filterState = filterState ^ componentState;
-				componentViewer.setFilterStates(filterState);
-			}
-		}
+//		if(workbenchPart instanceof ComponentViewer) {
+//			ComponentViewer componentViewer = (ComponentViewer) workbenchPart;
+//			if(selection) {
+//				componentViewer.setFilterStates(componentViewer.getFilterState() | componentState);
+//			} else {
+//				int filterState = componentViewer.getFilterState();
+//				filterState = filterState ^ componentState;
+//				componentViewer.setFilterStates(filterState);
+//			}
+//		}
 		return null;
 	}
 

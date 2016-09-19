@@ -33,6 +33,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 import org.osgi.service.component.runtime.dto.SatisfiedReferenceDTO;
 import org.osgi.service.component.runtime.dto.UnsatisfiedReferenceDTO;
 
@@ -84,6 +85,9 @@ public class ComponentLabelProvider extends StyledCellLabelProvider implements I
 
 		}
 	  }
+	  if(obj instanceof ComponentDescriptionDTO) {
+		  return null;
+	  }
 	    if(obj instanceof Component) {
 	    	Component component = (Component) obj;
 	    	switch(component.getState()) {
@@ -111,18 +115,26 @@ public class ComponentLabelProvider extends StyledCellLabelProvider implements I
 	    if (element instanceof ComponentConfigurationDTO) {
 	    	ComponentConfigurationDTO component = (ComponentConfigurationDTO) element;
 	        StringBuffer buf = new StringBuffer();
-	        buf.append(component.description.name);
-	        String[] services = component.description.serviceInterfaces;
-	        if (services != null) {
-	          buf.append("{");
-	          for (String service : services) {
-	            buf.append(" ");
-	            buf.append(service);
-	          }
-	          buf.append("}");
+	        if(component.description != null) {
+	        	buf.append(component.description.name);
+	        	String[] services = component.description.serviceInterfaces;
+	        	if (services != null) {
+	        		buf.append("[");
+	        		for (String service : services) {
+	        			buf.append(" ");
+	        			buf.append(service);
+	        		}
+	        		buf.append("]");
+	        	}
+	        	return buf.toString();
 	        }
-	        return buf.toString();
 	      }
+		  if(element instanceof ComponentDescriptionDTO) {
+			ComponentDescriptionDTO componentDescriptionDTO = (ComponentDescriptionDTO) element;
+			  
+		  return componentDescriptionDTO.name;
+		  }
+
 	    if (element instanceof SatisfiedReferenceDTO) {
 	    	SatisfiedReferenceDTO reference = (SatisfiedReferenceDTO) element;
 	        StringBuffer buf = new StringBuffer();

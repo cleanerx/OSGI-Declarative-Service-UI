@@ -7,5 +7,5 @@
     <service>
         <provide interface="org.osgi.service.component.runtime.ServiceComponentRuntime"/>
     </service>
-    <reference name="SCRManager" interface="org.eclipse.equinox.internal.ds.SCRManager" cardinality="1..1" policy="dynamic" bind="bindSCRManager" unbind="unbindSCRManager"/>
+    <reference name="SCRManager" interface="org.apache.felix.scr.ScrService" cardinality="1..1" policy="dynamic" bind="bindSCRManager" unbind="unbindSCRManager"/>
 </scr:component>

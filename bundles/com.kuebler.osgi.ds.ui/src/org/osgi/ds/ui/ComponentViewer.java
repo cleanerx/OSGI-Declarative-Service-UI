@@ -32,16 +32,19 @@ import org.eclipse.ui.part.ViewPart;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.service.component.runtime.ServiceComponentRuntime;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 import org.osgi.service.scr.api.IComponentListener;
 import org.osgi.service.scr.api.StrippedServiceComponentRuntime;
 import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
 public class ComponentViewer extends ViewPart implements IComponentListener {
 	private ComponentStateFilter componentFilter;
 	private TreeViewer treeViewer;
 	private Map<String, ComponentConfigurationDTO[]> scr2dtos;
-	private ServiceTracker<org.osgi.service.scr.api.StrippedServiceComponentRuntime, org.osgi.service.scr.api.StrippedServiceComponentRuntime> componentRuntimeTracker;
+	private ServiceTracker<ServiceComponentRuntime, ServiceComponentRuntime> componentRuntimeTracker;
 	private ServiceRegistration<IComponentListener> registerService;
 
 	public ComponentViewer() {
@@ -61,29 +64,69 @@ public class ComponentViewer extends ViewPart implements IComponentListener {
 		vieweFilters[0] = componentFilter;
 //		ResolvedComponentFilter unresolvedComponentFilter = new ResolvedComponentFilter();
 		treeViewer.setFilters(vieweFilters);
-		BundleContext bundleContext = DSUIActivator.getDefault().getBundle().getBundleContext();
+		final BundleContext bundleContext = DSUIActivator.getDefault().getBundle().getBundleContext();
 
-		componentRuntimeTracker = new ServiceTracker<>(bundleContext, StrippedServiceComponentRuntime.class, null);
+		componentRuntimeTracker = new ServiceTracker<>(bundleContext, ServiceComponentRuntime.class, new ServiceTrackerCustomizer<ServiceComponentRuntime, ServiceComponentRuntime>() {
+
+			@Override
+			public ServiceComponentRuntime addingService(ServiceReference<ServiceComponentRuntime> reference) {
+				final ServiceComponentRuntime serviceComponentRuntime = bundleContext.getService(reference);
+				Display.getDefault().asyncExec(new Runnable() {
+					
+					@Override
+					public void run() {
+						Collection<ComponentDescriptionDTO> allComponentConfigurationDTO = serviceComponentRuntime.getComponentDescriptionDTOs();
+//						treeViewer.setInput(allComponentConfigurationDTO);
+						
+					}
+				});
+				return serviceComponentRuntime;
+			}
+
+			@Override
+			public void modifiedService(ServiceReference<ServiceComponentRuntime> reference,
+					ServiceComponentRuntime service) {
+				ServiceComponentRuntime serviceComponentRuntime = bundleContext.getService(reference);
+				Collection<ComponentDescriptionDTO> allComponentConfigurationDTO = serviceComponentRuntime.getComponentDescriptionDTOs();
+				treeViewer.setInput(allComponentConfigurationDTO);
+			}
+
+			@Override
+			public void removedService(ServiceReference<ServiceComponentRuntime> reference,
+					ServiceComponentRuntime service) {
+				Display.getDefault().asyncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						if(!treeViewer.getTree().isDisposed()) {
+							treeViewer.setInput(null);
+						}
+						
+					}
+					
+				});
+			}
+		});
 		componentRuntimeTracker.open();
-		StrippedServiceComponentRuntime service = componentRuntimeTracker.getService();
+		ServiceComponentRuntime service = componentRuntimeTracker.getService();
 		if(service != null) {
-			Collection<ComponentConfigurationDTO> allComponentConfigurationDTO = service.getAllComponentConfigurationDTO();
+			Collection<ComponentDescriptionDTO> allComponentConfigurationDTO = service.getComponentDescriptionDTOs();
 			treeViewer.setInput(allComponentConfigurationDTO);
 		}
 		getViewSite().setSelectionProvider(treeViewer);
 		registerService = bundleContext.registerService(IComponentListener.class, this, null);
 	}
 
-	private BundleContext updateTreeViewerContents() {
-		BundleContext bundleContext = DSUIActivator.getDefault().getBundle().getBundleContext();
-		ServiceReference<ScrService> serviceReference = bundleContext.getServiceReference(ScrService.class);
-		try {
-			StrippedServiceComponentRuntime service = componentRuntimeTracker.getService();
-		} finally {
-			bundleContext.ungetService(serviceReference);
-		}
-		return bundleContext;
-	}
+//	private BundleContext updateTreeViewerContents() {
+//		BundleContext bundleContext = DSUIActivator.getDefault().getBundle().getBundleContext();
+//		ServiceReference<ScrService> serviceReference = bundleContext.getServiceReference(ScrService.class);
+//		try {
+//			StrippedServiceComponentRuntime service = componentRuntimeTracker.getService();
+//		} finally {
+//			bundleContext.ungetService(serviceReference);
+//		}
+//		return bundleContext;
+//	}
 
 	@Override
 	public void setFocus() {
@@ -93,11 +136,11 @@ public class ComponentViewer extends ViewPart implements IComponentListener {
 
 	public void setFilterStates(int filter) {
 		componentFilter.setFilter(filter);
-		StrippedServiceComponentRuntime service = componentRuntimeTracker.getService();
-		if(service != null) {
-			Collection<ComponentConfigurationDTO> allComponentConfigurationDTO = service.getAllComponentConfigurationDTO();
-			treeViewer.setInput(allComponentConfigurationDTO);
-		}
+//		StrippedServiceComponentRuntime service = componentRuntimeTracker.getService();
+//		if(service != null) {
+//			Collection<ComponentConfigurationDTO> allComponentConfigurationDTO = service.getAllComponentConfigurationDTO();
+//			treeViewer.setInput(allComponentConfigurationDTO);
+//		}
 		treeViewer.refresh();
 	}
 
@@ -141,6 +184,11 @@ public class ComponentViewer extends ViewPart implements IComponentListener {
 	public void update(String componentRuntimeName, ComponentConfigurationDTO configurationDTO) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void setInput(Collection<ComponentConfigurationDTO> componentDescriptionDTO) {
+		treeViewer.setInput(componentDescriptionDTO);
+		treeViewer.refresh(true);
 	}
 
 }

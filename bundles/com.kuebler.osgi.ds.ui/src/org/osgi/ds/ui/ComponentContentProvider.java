@@ -30,6 +30,7 @@ import org.osgi.dto.DTO;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 import org.osgi.service.component.runtime.dto.SatisfiedReferenceDTO;
 import org.osgi.service.component.runtime.dto.UnsatisfiedReferenceDTO;
 

@@ -49,6 +49,10 @@
          class="org.osgi.ds.ui.handler.AddConnectionHandler"
          commandId="com.kuebler.osgi.ds.ui.addconnection">
    </handler>
+   <handler
+         class="org.osgi.ds.ui.handler.RefreshHandler"
+         commandId="com.kuebler.osgi.ds.ui.refresh">
+   </handler>
  
 </extension>
 <extension
@@ -121,6 +125,11 @@
       <command
             commandId="com.kuebler.osgi.ds.ui.addconnection"
             icon="res/satisfied.png"
+            style="push">
+      </command>
+      <command
+            commandId="com.kuebler.osgi.ds.ui.refresh"
+            icon="res/unsatisfied.png"
             style="push">
       </command>
    </menuContribution>
