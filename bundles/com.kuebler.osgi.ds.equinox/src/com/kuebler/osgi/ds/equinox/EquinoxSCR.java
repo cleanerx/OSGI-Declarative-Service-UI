@@ -14,7 +14,7 @@ import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 import org.osgi.util.promise.Promise;
 
-@Component
+@Component(property = {"service.exported.interfaces=*", "service.exported.configs=ecf.generic.server"})
 public class EquinoxSCR implements ServiceComponentRuntime {
 
 	@Override
