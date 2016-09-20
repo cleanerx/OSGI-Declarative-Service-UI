@@ -5,6 +5,15 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Declarative Services</name>
+  
+      <dependencies>
+  	<dependency>
+  		<groupId>org.osgi</groupId>
+  		<artifactId>osgi.promise</artifactId>
+  		<version>6.0.0</version>
+  	</dependency>
+  </dependencies>
+  
   <modules>
   	
   	<module>../../bundles/com.kuebler.osgi.service.dto.compatibility</module>
