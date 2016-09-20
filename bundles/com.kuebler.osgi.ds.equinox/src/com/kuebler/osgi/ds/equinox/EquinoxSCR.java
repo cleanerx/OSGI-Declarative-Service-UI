@@ -21,7 +21,9 @@ import org.osgi.service.component.annotations.ReferencePolicy;
 import org.osgi.service.component.runtime.ServiceComponentRuntime;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
+import org.osgi.service.component.runtime.dto.ReferenceDTO;
 import org.osgi.service.component.runtime.dto.SatisfiedReferenceDTO;
+import org.osgi.service.component.runtime.dto.UnsatisfiedReferenceDTO;
 import org.osgi.util.promise.Promise;
 
 @Component(property = {"service.exported.interfaces=*", "service.exported.configs=ecf.generic.server"})
@@ -58,6 +60,32 @@ public class EquinoxSCR implements ServiceComponentRuntime {
 		componentDescriptionDTO.activate = component.getActivate();
 		componentDescriptionDTO.deactivate = component.getDeactivate();
 		componentDescriptionDTO.immediate = component.isImmediate();
+		org.apache.felix.scr.Reference[] references = component.getReferences();
+		List<ReferenceDTO> referenceDTOs = new ArrayList<>();
+		if(references != null) {
+			for (org.apache.felix.scr.Reference reference : references) {
+				ReferenceDTO referenceDTO = new ReferenceDTO();
+				referenceDTO.name = reference.getName();
+				referenceDTO.interfaceName = reference.getServiceName();
+				if(reference.isMultiple() && reference.isOptional())  {
+					referenceDTO.cardinality = "0..*";
+				}
+				if(!reference.isMultiple() && reference.isOptional())  {
+					referenceDTO.cardinality = "0..1";
+				}
+				if(!reference.isMultiple() && !reference.isOptional())  {
+					referenceDTO.cardinality = "1..1";
+				}
+				if(reference.isMultiple() && !reference.isOptional())  {
+					referenceDTO.cardinality = "1..*";
+				}
+
+				referenceDTO.target = reference.getTarget();
+//			referenceDTO.cardinality = reference.
+				referenceDTOs.add(referenceDTO);
+			}
+		}
+		componentDescriptionDTO.references = referenceDTOs.toArray(new ReferenceDTO[referenceDTOs.size()]);  
 		return componentDescriptionDTO;
 	}
 
@@ -103,6 +131,7 @@ public class EquinoxSCR implements ServiceComponentRuntime {
 			org.apache.felix.scr.Reference[] references = component.getReferences();
 			if(references != null) {
 				for (org.apache.felix.scr.Reference reference : references) {
+					List<UnsatisfiedReferenceDTO> unboundServices = new ArrayList<>();
 					if(reference.isSatisfied()) {
 						SatisfiedReferenceDTO satisfiedReferenceDTO = new SatisfiedReferenceDTO();
 						List<ServiceReferenceDTO> boundServices = new ArrayList<>();
@@ -130,7 +159,14 @@ public class EquinoxSCR implements ServiceComponentRuntime {
 							}
 							satisfiedReferences.add(satisfiedReferenceDTO);
 							satisfiedReferenceDTO.boundServices = boundServices.toArray(new ServiceReferenceDTO[]{});
+							satisfiedReferenceDTO.name = reference.getName();
+							satisfiedReferenceDTO.target = reference.getTarget();
 						}
+					} else {
+						UnsatisfiedReferenceDTO unsatisfiedReferenceDTO = new UnsatisfiedReferenceDTO();
+						unsatisfiedReferenceDTO.name = reference.getName();
+						unsatisfiedReferenceDTO.target = reference.getTarget();
+//						unsatisfiedReferenceDTO.targetServices = reference.getServiceName();
 					}
 				}
 			}
