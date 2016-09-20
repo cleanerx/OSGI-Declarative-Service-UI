@@ -11,7 +11,7 @@
     <module>../../bundles/com.kuebler.osgi.ds.equinox</module>
   	<module>../../bundles/com.kuebler.osgi.ds.ui</module>
  <!-- 	<module>../../bundles/com.kuebler.osgi.scr.rmi.api</module> -->
-  	<module>../../features/com.kuebler.osgi.ds.ui.feature</module>  
+<!--  	<module>../../features/com.kuebler.osgi.ds.ui.feature</module>-->  
   	<module>../../build/com.kuebler.osgi.ds.p2</module>
   </modules>
   
