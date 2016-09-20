@@ -7,6 +7,6 @@
   	<groupId>com.kuebler.osgi.ds</groupId>
   	<artifactId>com.kuebler.osgi.ds</artifactId>
   	<version>0.0.1-SNAPSHOT</version>
-  	<relativePath>../pom.xml</relativePath>
+  	<relativePath>../../build/com.kuebler.osgi.ds/pom.xml</relativePath>
   </parent>
 </project>
