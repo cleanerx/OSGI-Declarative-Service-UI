@@ -9,12 +9,12 @@
         <version>0.0.1-SNAPSHOT</version>
         <description>P2 Repository for DS UI</description>
 
-	<parent>
+  <parent>
   	<groupId>com.kuebler.osgi.ds</groupId>
-		<artifactId>com.kuebler.osgi.ds</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../com.kuebler.osgi.ds</relativePath>
-	</parent>
+  	<artifactId>com.kuebler.osgi.ds</artifactId>
+  	<version>0.0.1-SNAPSHOT</version>
+  	<relativePath>../../build/com.kuebler.osgi.ds/pom.xml</relativePath>
+  </parent>
 
 
 <build>
