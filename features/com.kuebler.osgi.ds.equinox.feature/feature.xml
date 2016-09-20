@@ -21,6 +21,7 @@
       <import plugin="org.eclipse.equinox.ds"/>
       <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.osgi.services"/>
+      <import plugin="org.osgi.promise"/>
    </requires>
 
    <plugin
@@ -36,12 +37,5 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="org.osgi.util.promise"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-         
+       
 </feature>
