@@ -3,7 +3,7 @@
    <feature url="features/com.kuebler.osgi.ds.e3gef3.feature_0.0.1.qualifier.jar" id="com.kuebler.osgi.ds.e3gef3.feature" version="0.0.1.qualifier">
       <category name="com.kuebler.ds.extension"/>
    </feature>
-   <feature url="features/com.kuebler.osgi.ds.equinox.feature_1.0.0.qualifier.jar" id="com.kuebler.osgi.ds.equinox.feature" version="1.0.0.qualifier">
+   <feature url="features/com.kuebler.osgi.ds.equinox.feature_0.0.1.qualifier.jar" id="com.kuebler.osgi.ds.equinox.feature" version="0.0.1.qualifier">
       <category name="com.kuebler.ds.extension"/>
    </feature>
    <category-def name="com.kuebler.ds.extension" label="Declarative Service Extensions">
