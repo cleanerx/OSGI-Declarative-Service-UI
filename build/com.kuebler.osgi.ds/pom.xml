@@ -10,8 +10,9 @@
   	<module>../../bundles/com.kuebler.osgi.service.dto.compatibility</module>
     <module>../../bundles/com.kuebler.osgi.ds.equinox</module>
   	<module>../../bundles/com.kuebler.osgi.ds.ui</module>
- <!-- 	<module>../../bundles/com.kuebler.osgi.scr.rmi.api</module>
-  	<module>../../features/com.kuebler.osgi.ds.ui.feature</module> --> 
+ <!-- 	<module>../../bundles/com.kuebler.osgi.scr.rmi.api</module> -->
+  	<module>../../features/com.kuebler.osgi.ds.ui.feature</module>  
+  	<module>../../features/com.kuebler.osgi.ds.p2</module>
   </modules>
   
   <properties>
