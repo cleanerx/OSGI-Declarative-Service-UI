@@ -2,7 +2,7 @@
 <feature
       id="com.kuebler.osgi.ds.equinox.feature"
       label="Equinox DS Feature Wrapper"
-      version="1.0.0.qualifier"
+      version="0.0.1.qualifier"
       provider-name="Jens Kübler">
 
    <description url="http://www.example.com/description">
