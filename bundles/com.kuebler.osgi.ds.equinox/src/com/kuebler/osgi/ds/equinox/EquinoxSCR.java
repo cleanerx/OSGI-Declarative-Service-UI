@@ -60,6 +60,11 @@ public class EquinoxSCR implements ServiceComponentRuntime {
 		componentDescriptionDTO.activate = component.getActivate();
 		componentDescriptionDTO.deactivate = component.getDeactivate();
 		componentDescriptionDTO.immediate = component.isImmediate();
+		componentDescriptionDTO.defaultEnabled = component.isDefaultEnabled();
+		componentDescriptionDTO.factory = component.getFactory();
+		componentDescriptionDTO.modified = component.getModified();
+		componentDescriptionDTO.implementationClass = component.getClassName();
+		componentDescriptionDTO.configurationPolicy = component.getConfigurationPolicy();
 		org.apache.felix.scr.Reference[] references = component.getReferences();
 		List<ReferenceDTO> referenceDTOs = new ArrayList<>();
 		if(references != null) {
@@ -113,7 +118,11 @@ public class EquinoxSCR implements ServiceComponentRuntime {
 				componentConfigurationDTO.state = ComponentConfigurationDTO.SATISFIED;
 				break;
 			case org.apache.felix.scr.Component.STATE_UNSATISFIED:
-				componentConfigurationDTO.state = ComponentConfigurationDTO.UNSATISFIED_REFERENCE;
+				if(componentConfigurationDTO.unsatisfiedReferences == null || componentConfigurationDTO.unsatisfiedReferences.length == 0) {
+					componentConfigurationDTO.state = ComponentConfigurationDTO.UNSATISFIED_CONFIGURATION;
+				} else {
+					componentConfigurationDTO.state = ComponentConfigurationDTO.UNSATISFIED_REFERENCE;
+				}
 			default:
 				break;
 			}
