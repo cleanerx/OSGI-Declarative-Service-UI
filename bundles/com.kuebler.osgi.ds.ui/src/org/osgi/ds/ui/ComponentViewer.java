@@ -72,7 +72,7 @@ public class ComponentViewer extends ViewPart  {
 					
 					@Override
 					public void run() {
-						Collection<ComponentDescriptionDTO> allComponentConfigurationDTO = serviceComponentRuntime.getComponentDescriptionDTOs();
+//						Collection<ComponentDescriptionDTO> allComponentConfigurationDTO = serviceComponentRuntime.getComponentDescriptionDTOs();
 //						treeViewer.setInput(allComponentConfigurationDTO);
 						
 					}
