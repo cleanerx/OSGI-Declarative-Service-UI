@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Service Component Runtime Equinox
 Bundle-SymbolicName: com.kuebler.osgi.ds.equinox
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.0.1.qualifier
 Import-Package: org.apache.felix.scr;version="1.6.0",
  org.eclipse.equinox.internal.ds,
  org.osgi.framework;version="1.8.0",
