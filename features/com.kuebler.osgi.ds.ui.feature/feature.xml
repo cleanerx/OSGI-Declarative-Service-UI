@@ -17,6 +17,11 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import feature="org.eclipse.gef" version="3.11.0.201606061308"/>
+      <import feature="org.eclipse.rcp" version="4.6.0.v20160606-1342"/>
+   </requires>
+
    <plugin
          id="com.kuebler.osgi.ds.ui"
          download-size="0"
@@ -25,7 +30,7 @@
          unpack="false"/>
 
    <plugin
-         id="com.kuebler.osgi.scr.rmi.api"
+         id="com.kuebler.osgi.service.dto.compatibility"
          download-size="0"
          install-size="0"
          version="0.0.0"
