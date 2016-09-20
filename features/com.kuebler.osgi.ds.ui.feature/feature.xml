@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.kuebler.osgi.ds.ui.e3gef3.feature"
+      id="com.kuebler.osgi.ds.e3gef3.feature"
       label="Declarative Service UI"
       version="0.0.1.qualifier"
       provider-name="Jens Kuebler">
