@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.kuebler.osgi.ds.e3gef3.feature_0.0.1.qualifier.jar" id="com.kuebler.osgi.ds.e3gef3.feature" version="0.0.1.qualifier">
+      <category name="com.kuebler.ds.extension"/>
+   </feature>
+   <feature url="features/com.kuebler.osgi.ds.equinox.feature_1.0.0.qualifier.jar" id="com.kuebler.osgi.ds.equinox.feature" version="1.0.0.qualifier">
+      <category name="com.kuebler.ds.extension"/>
+   </feature>
+   <category-def name="com.kuebler.ds.extension" label="Declarative Service Extensions">
+      <description>
+         Wraps the equinox ScrManager to provide the current state of the components in the OSGi System.
+      </description>
+   </category-def>
+</site>
