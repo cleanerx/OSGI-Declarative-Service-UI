@@ -10,7 +10,7 @@
         <description>P2 Repository for DS UI</description>
 
 	<parent>
-		<groupId>com.kuebler.osgi</groupId>
+  	<groupId>com.kuebler.osgi.ds</groupId>
 		<artifactId>com.kuebler.osgi.ds</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../com.kuebler.osgi.ds</relativePath>
