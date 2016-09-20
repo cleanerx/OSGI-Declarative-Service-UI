@@ -8,20 +8,20 @@
   <modules>
   	
   	<module>../../bundles/com.kuebler.osgi.service.dto.compatibility</module>
+    <module>../../bundles/com.kuebler.osgi.ds.equinox</module>
   	<module>../../bundles/com.kuebler.osgi.ds.ui</module>
-  	<module>../../bundles/com.kuebler.osgi.service.scr.api</module>
  <!-- 	<module>../../bundles/com.kuebler.osgi.scr.rmi.api</module>
   	<module>../../features/com.kuebler.osgi.ds.ui.feature</module> --> 
   </modules>
   
   <properties>
-		<tycho-version>0.24.0</tycho-version>
+		<tycho-version>0.25.0</tycho-version>
 	</properties>
 	
 		<repositories>
 		<repository>
 			<id>eclipse-mars</id>
-			<url>http://download.eclipse.org/releases/mars</url>
+			<url>http://download.eclipse.org/releases/neon</url>
 			<layout>p2</layout>
 		</repository>
 	</repositories>
@@ -47,7 +47,10 @@
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
 				<version>${tycho-version}</version>
-				<executions>
+				<configuration>
+          			<pomDependencies>consider</pomDependencies>
+        		</configuration>
+        				<executions>
 					<execution>
 						<id>plugin-source</id>
 						<goals>

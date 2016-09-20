@@ -9,6 +9,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
 Import-Package: org.osgi.dto;version="1.0.0",
  org.osgi.framework.dto;version="1.8.0",
  org.osgi.service.component.runtime.dto;version="1.3.0"
-Export-Package: org.osgi.dto;version="1.0.0",
- org.osgi.framework.dto;version="1.8.0";uses:="org.osgi.dto",
- org.osgi.service.component.runtime.dto;version="1.3.0";uses:="org.osgi.dto,org.osgi.framework.dto"
+Export-Package: org.osgi.service.component.runtime.dto;version="1.3.0";uses:="org.osgi.dto,org.osgi.framework.dto"
