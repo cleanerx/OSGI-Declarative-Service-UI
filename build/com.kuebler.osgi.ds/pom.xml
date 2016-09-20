@@ -40,6 +40,9 @@
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
+				<configuration>
+          			<pomDependencies>consider</pomDependencies>
+        		</configuration>
 			</plugin>
 
 			<!-- enable source bundle generation -->
@@ -47,9 +50,6 @@
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
 				<version>${tycho-version}</version>
-				<configuration>
-          			<pomDependencies>consider</pomDependencies>
-        		</configuration>
         				<executions>
 					<execution>
 						<id>plugin-source</id>
