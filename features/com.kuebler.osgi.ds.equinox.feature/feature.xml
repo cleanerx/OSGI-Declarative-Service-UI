@@ -21,7 +21,7 @@
       <import plugin="org.eclipse.equinox.ds"/>
       <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.osgi.services"/>
-      <import plugin="org.osgi.promise"/>
+      <import plugin="osgi.promise"/>
    </requires>
 
    <plugin
