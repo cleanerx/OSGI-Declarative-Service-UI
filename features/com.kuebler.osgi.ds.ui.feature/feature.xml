@@ -28,7 +28,6 @@
       <import plugin="org.eclipse.osgi"/>
       <import plugin="org.eclipse.osgi.services"/>
       <import plugin="org.eclipse.equinox.ds"/>
-      <import plugin="osgi.promise"/>
    </requires>
 
    <plugin
@@ -40,6 +39,13 @@
 
    <plugin
          id="com.kuebler.osgi.service.dto.compatibility"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="osgi.promise"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -35,6 +35,11 @@
 			<url>http://download.eclipse.org/releases/neon</url>
 			<layout>p2</layout>
 		</repository>
+		<repository>
+			<id>osgi-promise</id>
+			<url>http://depth.openseamap.org/p2</url>
+			<layout>p2</layout>
+		</repository>
 	</repositories>
 	
 	<build>
