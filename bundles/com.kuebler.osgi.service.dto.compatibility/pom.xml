@@ -7,13 +7,6 @@
   	<version>0.0.1-SNAPSHOT</version>
   	<relativePath>../../build/com.kuebler.osgi.ds/pom.xml</relativePath>
   </parent>
-    <dependencies>
-  	<dependency>
-  		<groupId>org.osgi</groupId>
-  		<artifactId>osgi.promise</artifactId>
-  		<version>6.0.0</version>
-  	</dependency>
-  </dependencies>
   
   <artifactId>com.kuebler.osgi.service.dto.compatibility</artifactId>
   <packaging>eclipse-plugin</packaging>

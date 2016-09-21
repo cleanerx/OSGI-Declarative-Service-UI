@@ -5,13 +5,24 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Declarative Services</name>
+  
+      <dependencies>
+  	<dependency>
+  		<groupId>org.osgi</groupId>
+  		<artifactId>osgi.promise</artifactId>
+  		<version>6.0.0</version>
+  	</dependency>
+  </dependencies>
+  
   <modules>
   	
   	<module>../../bundles/com.kuebler.osgi.service.dto.compatibility</module>
     <module>../../bundles/com.kuebler.osgi.ds.equinox</module>
   	<module>../../bundles/com.kuebler.osgi.ds.ui</module>
- <!-- 	<module>../../bundles/com.kuebler.osgi.scr.rmi.api</module>
-  	<module>../../features/com.kuebler.osgi.ds.ui.feature</module> --> 
+ <!-- 	<module>../../bundles/com.kuebler.osgi.scr.rmi.api</module> -->
+  	<module>../../features/com.kuebler.osgi.ds.ui.feature</module>  
+  	<module>../../features/com.kuebler.osgi.ds.equinox.feature</module>  
+  	<module>../../build/com.kuebler.osgi.ds.p2</module>
   </modules>
   
   <properties>
@@ -29,27 +40,43 @@
 	<build>
 		<plugins>
 
-			<!-- plugin> <groupId>org.eclipse.tycho</groupId> <artifactId>target-platform-configuration</artifactId> 
-				<version>${tycho-version}</version> <configuration> <target> <artifact> <groupId>com.wuetherich.osgi.ds</groupId> 
-				<artifactId>com.wuetherich.osgi.ds.annotations.target</artifactId> <version>${project.version}</version> 
-				</artifact> </target> </configuration> </plugin -->
-
 			<plugin>
-				<!-- enable tycho build extension -->
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
-
+			 <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>target-platform-configuration</artifactId>
+        <version>${tycho-version}</version>
+        <configuration>
+          <pomDependencies>consider</pomDependencies>
+ 		<environments>
+            <environment>
+              <os>win32</os>
+              <ws>win32</ws>
+              <arch>x86</arch>
+            </environment>
+            <environment>
+              <os>linux</os>
+              <ws>gtk</ws>
+              <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>macosx</os>
+              <ws>cocoa</ws>
+              <arch>x86_64</arch>
+            </environment>
+          </environments>
+        </configuration>
+      </plugin>
+ 
 			<!-- enable source bundle generation -->
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-source-plugin</artifactId>
 				<version>${tycho-version}</version>
-				<configuration>
-          			<pomDependencies>consider</pomDependencies>
-        		</configuration>
         				<executions>
 					<execution>
 						<id>plugin-source</id>
@@ -59,6 +86,14 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+	<groupId>org.eclipse.tycho</groupId>
+	<artifactId>tycho-compiler-plugin</artifactId>
+	<version>${tycho-version}</version>
+	<configuration>
+ 	   <compilerArgument>-err:-forbidden</compilerArgument>
+        </configuration>
+</plugin>
 		</plugins>
 	</build>
 </project>

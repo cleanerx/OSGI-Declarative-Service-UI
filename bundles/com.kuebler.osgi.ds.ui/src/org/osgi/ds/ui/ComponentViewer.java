@@ -35,17 +35,14 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.runtime.ServiceComponentRuntime;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
-import org.osgi.service.scr.api.IComponentListener;
-import org.osgi.service.scr.api.StrippedServiceComponentRuntime;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 
-public class ComponentViewer extends ViewPart implements IComponentListener {
+public class ComponentViewer extends ViewPart  {
 	private ComponentStateFilter componentFilter;
 	private TreeViewer treeViewer;
 	private Map<String, ComponentConfigurationDTO[]> scr2dtos;
 	private ServiceTracker<ServiceComponentRuntime, ServiceComponentRuntime> componentRuntimeTracker;
-	private ServiceRegistration<IComponentListener> registerService;
 
 	public ComponentViewer() {
 		scr2dtos = new HashMap<String, ComponentConfigurationDTO[]>();
@@ -75,7 +72,7 @@ public class ComponentViewer extends ViewPart implements IComponentListener {
 					
 					@Override
 					public void run() {
-						Collection<ComponentDescriptionDTO> allComponentConfigurationDTO = serviceComponentRuntime.getComponentDescriptionDTOs();
+//						Collection<ComponentDescriptionDTO> allComponentConfigurationDTO = serviceComponentRuntime.getComponentDescriptionDTOs();
 //						treeViewer.setInput(allComponentConfigurationDTO);
 						
 					}
@@ -114,7 +111,6 @@ public class ComponentViewer extends ViewPart implements IComponentListener {
 			treeViewer.setInput(allComponentConfigurationDTO);
 		}
 		getViewSite().setSelectionProvider(treeViewer);
-		registerService = bundleContext.registerService(IComponentListener.class, this, null);
 	}
 
 //	private BundleContext updateTreeViewerContents() {
@@ -153,39 +149,9 @@ public class ComponentViewer extends ViewPart implements IComponentListener {
 		if(componentRuntimeTracker != null) {
 			componentRuntimeTracker.close();
 		}
-		registerService.unregister();
 		super.dispose();
 	}
 
-	@Override
-	public void newComponentRuntime(String componentRuntimeName) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void disposedComponentRuntime(String componentRuntimeName) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-  public void receive(String componentRuntimeName, final ComponentConfigurationDTO[] configurations) {
-		Display.getDefault().asyncExec(new Runnable() {
-
-			@Override
-			public void run() {
-				treeViewer.setInput(configurations);
-			}
-		});
-	}
-
-	@Override
-	public void update(String componentRuntimeName, ComponentConfigurationDTO configurationDTO) {
-		// TODO Auto-generated method stub
-
-	}
-	
 	public void setInput(Collection<ComponentConfigurationDTO> componentDescriptionDTO) {
 		treeViewer.setInput(componentDescriptionDTO);
 		treeViewer.refresh(true);

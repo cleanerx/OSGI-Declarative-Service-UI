@@ -58,7 +58,6 @@ import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 import org.osgi.service.component.runtime.dto.ReferenceDTO;
 import org.osgi.service.component.runtime.dto.SatisfiedReferenceDTO;
 import org.osgi.service.component.runtime.dto.UnsatisfiedReferenceDTO;
-import org.osgi.service.scr.api.StrippedServiceComponentRuntime;
 
 /**
  *
@@ -225,12 +224,15 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
                 if (properties != null && properties.get("component.id") != null) {
                   if (componentX.id == (Long) properties.get("component.id")) {
                     createGraphNode4Component(nodes, inboundComponent);
-                    GraphConnection graphConnection = new GraphConnection(graph, ZestStyles.CONNECTIONS_DIRECTED, nodes.get(componentX), nodes.get(inboundComponent));
+                    GraphConnection graphConnection = new GraphConnection(graph, ZestStyles.CONNECTIONS_DIRECTED, nodes.get(inboundComponent), nodes.get(componentX));
                     graphConnection.setLineStyle(Graphics.LINE_SOLID);
-                    for (ReferenceDTO referenceDTO : inboundComponent.description.references) {
-                      if (referenceDTO.name == reference.name) {
-                        setConnectionText(referenceDTO, graphConnection);
-                      }
+                    ReferenceDTO[] references = inboundComponent.description.references;
+                    if(references != null) {
+                    	for (ReferenceDTO referenceDTO : references) {
+                    		if (referenceDTO.name == reference.name) {
+                    			setConnectionText(referenceDTO, graphConnection);
+                    		}
+                    	}
                     }
                   }
                 }
@@ -291,6 +293,16 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
                                 graphNodeX.setBackgroundColor(ColorConstants.lightGray);
                                 GraphConnection graphConnection = new GraphConnection(graph, ZestStyles.CONNECTIONS_DIRECTED, nodes.get(componentX), graphNodeX);
                                 graphConnection.setLineStyle(Graphics.LINE_DASH);
+                                if(componentX.description.references != null) {
+                                	for (ReferenceDTO referenceDTO : componentX.description.references) {
+                                		if(referenceDTO.name == reference.name) {
+                                			setConnectionText(referenceDTO, graphConnection);
+                                		}
+                                	}
+                                }
+
+//                                serviceReference2.
+//									setConnectionText(componentX., graphConnection);
       //                          setConnectionText(reference, graphConnection);
               				}
               			}

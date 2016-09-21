@@ -132,6 +132,10 @@
             icon="res/unsatisfied.png"
             style="push">
       </command>
+      <dynamic
+            class="org.osgi.ds.ui.SCRToolContributor"
+            id="com.kuebler.osgi.ds.ui.select">
+      </dynamic>
    </menuContribution>
 </extension>
 <extension
