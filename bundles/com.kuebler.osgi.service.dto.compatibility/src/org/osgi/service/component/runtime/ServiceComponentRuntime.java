@@ -17,16 +17,15 @@ package org.osgi.service.component.runtime;
 
 import java.util.Collection;
 
-import org.osgi.framework.Bundle;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
 import org.osgi.util.promise.Promise;
 
 public interface ServiceComponentRuntime {
 
-	 Collection<ComponentDescriptionDTO> getComponentDescriptionDTOs(Bundle... paramVarArgs);
+	 Collection<ComponentDescriptionDTO> getComponentDescriptionDTOs();
 	  
-	 ComponentDescriptionDTO getComponentDescriptionDTO(Bundle paramBundle, String paramString);
+	 ComponentDescriptionDTO getComponentDescriptionDTO(String paramString);
 	  
 	 Collection<ComponentConfigurationDTO> getComponentConfigurationDTOs(ComponentDescriptionDTO paramComponentDescriptionDTO);
 	  
