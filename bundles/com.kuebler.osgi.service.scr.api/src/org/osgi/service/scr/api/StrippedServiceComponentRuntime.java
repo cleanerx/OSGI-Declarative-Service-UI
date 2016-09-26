@@ -18,7 +18,7 @@ package org.osgi.service.scr.api;
 import java.util.Collection;
 
 import org.osgi.framework.dto.ServiceReferenceDTO;
-import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentConfigurationDTO;
 
 public interface StrippedServiceComponentRuntime  {
 

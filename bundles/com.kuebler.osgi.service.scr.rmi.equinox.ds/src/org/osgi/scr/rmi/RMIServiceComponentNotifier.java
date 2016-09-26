@@ -14,7 +14,7 @@ import org.osgi.framework.ServiceListener;
 import org.osgi.scr.rmi.api.IRMINotifier;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentConfigurationDTO;
 
 //@Component
 public class RMIServiceComponentNotifier  {

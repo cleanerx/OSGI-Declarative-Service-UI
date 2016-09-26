@@ -44,18 +44,18 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
-import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
-import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
-import org.osgi.service.component.runtime.dto.ReferenceDTO;
-import org.osgi.service.component.runtime.dto.SatisfiedReferenceDTO;
-import org.osgi.service.component.runtime.dto.UnsatisfiedReferenceDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentDescriptionDTO;
+import org.osgi.service.component.runtime.dto.serial.ReferenceDTO;
+import org.osgi.service.component.runtime.dto.serial.SatisfiedReferenceDTO;
+import org.osgi.service.component.runtime.dto.serial.UnsatisfiedReferenceDTO;
 
-import com.kuebler.osgi.service.dto.serial.ComponentConfigurationDTOSerializable;
-import com.kuebler.osgi.service.dto.serial.ComponentDescriptionDTOSerializable;
-import com.kuebler.osgi.service.dto.serial.ReferenceDTOSerializable;
-import com.kuebler.osgi.service.dto.serial.SatisfiedReferenceDTOSerializable;
-import com.kuebler.osgi.service.dto.serial.ServiceReferenceDTOSerializable;
-import com.kuebler.osgi.service.dto.serial.UnsatisfiedReferenceDTOSerializable;
+import org.osgi.service.dto.serial.ComponentConfigurationDTO;
+import org.osgi.service.dto.serial.ComponentDescriptionDTO;
+import org.osgi.service.dto.serial.ReferenceDTO;
+import org.osgi.service.dto.serial.SatisfiedReferenceDTO;
+import org.osgi.service.dto.serial.ServiceReferenceDTO;
+import org.osgi.service.dto.serial.UnsatisfiedReferenceDTO;
 
 
 @Component(immediate = true)

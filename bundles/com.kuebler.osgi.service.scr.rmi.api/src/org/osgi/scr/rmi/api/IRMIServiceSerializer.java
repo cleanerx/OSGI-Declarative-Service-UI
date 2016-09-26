@@ -20,7 +20,7 @@ import java.rmi.RemoteException;
 import java.util.Collection;
 
 import org.osgi.framework.dto.ServiceReferenceDTO;
-import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentConfigurationDTO;
 
 /**
  * Remote abstraction

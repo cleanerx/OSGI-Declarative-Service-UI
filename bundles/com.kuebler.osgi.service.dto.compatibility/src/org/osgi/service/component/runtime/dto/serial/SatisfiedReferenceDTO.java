@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package org.osgi.service.component.runtime.dto;
+package org.osgi.service.component.runtime.dto.serial;
 
 import java.io.Serializable;
 
 import org.osgi.dto.DTO;
-import org.osgi.framework.dto.ServiceReferenceDTO;
+import org.osgi.framework.dto.serial.ServiceReferenceDTO;
 
 /**
  * A representation of a satisfied reference.

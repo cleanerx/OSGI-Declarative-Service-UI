@@ -28,8 +28,8 @@ import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.part.ViewPart;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
-import org.osgi.service.component.runtime.ServiceComponentRuntime;
-import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentDescriptionDTO;
+import org.osgi.service.component.runtime.serial.ServiceComponentRuntime;
 import org.osgi.util.tracker.ServiceTracker;
 
 public class ServiceViewer extends ViewPart {
