@@ -2,12 +2,14 @@ package org.osgi.ds.ui;
 
 import java.awt.Color;
 
+import org.eclipse.ecf.osgi.services.remoteserviceadmin.IEndpointDescriptionLocator;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.resource.ResourceManager;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
@@ -36,6 +38,8 @@ import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.menus.IWorkbenchContribution;
 import org.eclipse.ui.menus.WorkbenchWindowControlContribution;
 import org.eclipse.ui.services.IServiceLocator;
+import org.osgi.service.remoteserviceadmin.EndpointDescription;
+import org.osgi.util.tracker.ServiceTracker;
 
 public class SCRToolContributor extends WorkbenchWindowControlContribution implements IWorkbenchContribution {
 	
@@ -91,6 +95,8 @@ private boolean _isTypeaheadDefaultText = true;
 
   private Shell shell;
 
+private ServiceTracker<IEndpointDescriptionLocator, IEndpointDescriptionLocator> serviceTracker;
+
   @Override
   protected Control createControl(final Composite parent) {
 
@@ -102,6 +108,9 @@ private boolean _isTypeaheadDefaultText = true;
     gridLayout.marginRight = 0;
     _composite.setLayout(gridLayout);
 
+    serviceTracker = new ServiceTracker<IEndpointDescriptionLocator,IEndpointDescriptionLocator>(DSUIActivator.getDefault().getBundle().getBundleContext(), IEndpointDescriptionLocator.class, null);
+    serviceTracker.open();
+    
     _toolBar = new ToolBar(_composite, SWT.FLAT);
     _toolItem = new ToolItem(_toolBar, SWT.DROP_DOWN);
 //    _toolItem.setImage(ResourceManager.getImage(ModelViewPlugin.getImageDescriptor(UPDATE_ICON)));
@@ -243,6 +252,8 @@ private boolean _isTypeaheadDefaultText = true;
 
 	    _tableViewer.setContentProvider(new ArrayContentProvider());
 	    _tableViewer.setLabelProvider(new LabelProvider());
+	    
+	    _tableViewer.setInput(serviceTracker.getService().getDiscoveredEndpoints());
 
 //	    createContextMenu();
 
@@ -269,9 +280,13 @@ private boolean _isTypeaheadDefaultText = true;
 	      @Override
 	      public void doubleClick(DoubleClickEvent event) {
 	        ISelection selection = event.getSelection();
-//	        setLastSelection(selection);
+	        EndpointDescription ed = (EndpointDescription) ((IStructuredSelection)selection).getFirstElement();
+	        String id2 = ed.getId();
+	        ((ComponentViewer)getWorkbenchWindow().getActivePage().getActivePart()).setEndpointId(ed.getFrameworkUUID(), id2);
+	        setChosenEndpoint(((IStructuredSelection)selection).getFirstElement());
 	        close();
 	      }
+
 	    });
 
 	    return parent;
@@ -291,6 +306,11 @@ private boolean _isTypeaheadDefaultText = true;
 //	    return _shell;
 //	  }
 
+		private void setChosenEndpoint(Object firstElement) {
+			// TODO Auto-generated method stub
+			
+		}
+
 
   private void refresh() {
     _toolbarManager.update(false);
@@ -305,6 +325,14 @@ private boolean _isTypeaheadDefaultText = true;
       _toolItem.setEnabled(enabled);
     }
   }
+  
+  @Override
+	public void dispose() {
+		super.dispose();
+		if(serviceTracker!= null) {
+			serviceTracker.close();
+		}
+	}
   
   /**
    * @see org.eclipse.ui.menus.IWorkbenchContribution#initialize(org.eclipse.ui.services.IServiceLocator)

@@ -46,7 +46,8 @@ import org.osgi.util.promise.Promise;
 public class EquinoxSCR implements ServiceComponentRuntime {
 
 	@Override
-	public Collection<ComponentDescriptionDTO> getComponentDescriptionDTOs(Bundle... paramVarArgs) {
+	public Collection<ComponentDescriptionDTO> getComponentDescriptionDTOs() {
+		Bundle[] paramVarArgs = null;
 		ScrService scrManager = _scrManager.get();
 		List<ComponentDescriptionDTO> componentDescriptions = new ArrayList<>();
 		
@@ -56,15 +57,16 @@ public class EquinoxSCR implements ServiceComponentRuntime {
 				componentDescriptions.add(createComponentDTO(component));
 			}
 			
-		}
-		
-		for (Bundle bundle : paramVarArgs) {
-			org.apache.felix.scr.Component[] components = scrManager.getComponents(bundle);
-			for (org.apache.felix.scr.Component component : components) {
-				componentDescriptions.add(createComponentDTO(component));
-				
+		} else {
+			for (Bundle bundle : paramVarArgs) {
+				org.apache.felix.scr.Component[] components = scrManager.getComponents(bundle);
+				for (org.apache.felix.scr.Component component : components) {
+					componentDescriptions.add(createComponentDTO(component));
+					
+				}
 			}
 		}
+		
 		return componentDescriptions;
 	}
 
@@ -111,7 +113,7 @@ public class EquinoxSCR implements ServiceComponentRuntime {
 	}
 
 	@Override
-	public ComponentDescriptionDTO getComponentDescriptionDTO(Bundle paramBundle, String paramString) {
+	public ComponentDescriptionDTO getComponentDescriptionDTO(String paramString) {
 		return null;
 	}
 

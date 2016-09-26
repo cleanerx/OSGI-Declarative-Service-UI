@@ -16,11 +16,13 @@
 
 package org.osgi.ds.ui;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.felix.scr.ScrService;
+import org.eclipse.core.internal.registry.osgi.OSGIUtils;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -30,8 +32,12 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.ui.part.ViewPart;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.Constants;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
+import org.osgi.framework.launch.Framework;
 import org.osgi.service.component.runtime.ServiceComponentRuntime;
 import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
 import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
@@ -43,6 +49,8 @@ public class ComponentViewer extends ViewPart  {
 	private TreeViewer treeViewer;
 	private Map<String, ComponentConfigurationDTO[]> scr2dtos;
 	private ServiceTracker<ServiceComponentRuntime, ServiceComponentRuntime> componentRuntimeTracker;
+	private ServiceReference<?>[] serviceReferences;
+	private ServiceComponentRuntime serviceComponentRuntime;
 
 	public ComponentViewer() {
 		scr2dtos = new HashMap<String, ComponentConfigurationDTO[]>();
@@ -105,6 +113,7 @@ public class ComponentViewer extends ViewPart  {
 			}
 		});
 		componentRuntimeTracker.open();
+		
 		ServiceComponentRuntime service = componentRuntimeTracker.getService();
 		if(service != null) {
 			Collection<ComponentDescriptionDTO> allComponentConfigurationDTO = service.getComponentDescriptionDTOs();
@@ -152,9 +161,40 @@ public class ComponentViewer extends ViewPart  {
 		super.dispose();
 	}
 
-	public void setInput(Collection<ComponentConfigurationDTO> componentDescriptionDTO) {
-		treeViewer.setInput(componentDescriptionDTO);
-		treeViewer.refresh(true);
+	public void setInput(Collection<ComponentConfigurationDTO> componentDescriptionDTO2) {
+		if(serviceComponentRuntime != null) {
+			Collection<ComponentDescriptionDTO> componentDescriptionDTOs = serviceComponentRuntime.getComponentDescriptionDTOs();
+			Collection<ComponentConfigurationDTO> componentConfigurationDTOs = new ArrayList<>();
+			for (ComponentDescriptionDTO componentDescriptionDTO : componentDescriptionDTOs) {
+				componentConfigurationDTOs.addAll(serviceComponentRuntime.getComponentConfigurationDTOs(componentDescriptionDTO));
+			}
+			treeViewer.setInput(componentConfigurationDTOs);
+			treeViewer.refresh(true);
+		}
+	}
+	
+	public void setEndpointId(String frameworkUUID, String endpointID) {
+		try {
+			 BundleContext bundleContext = DSUIActivator.getDefault().getBundle().getBundleContext();
+			ServiceReference<?>[] serviceReferences2 = bundleContext.getServiceReferences("org.osgi.service.component.runtime.ServiceComponentRuntime", null);
+			for (ServiceReference<?> serviceReference : serviceReferences2) {
+				if(endpointID.equals(serviceReference.getProperty("endpoint.id")) || frameworkUUID.equals(bundleContext.getProperty(Constants.FRAMEWORK_UUID))) {
+					serviceComponentRuntime = (ServiceComponentRuntime)bundleContext.getService(serviceReference);
+					if(serviceComponentRuntime != null) {
+		    			Collection<ComponentDescriptionDTO> componentDescriptionDTOs = serviceComponentRuntime.getComponentDescriptionDTOs();
+		    			Collection<ComponentConfigurationDTO> componentConfigurationDTOs = new ArrayList<>();
+		    			for (ComponentDescriptionDTO componentDescriptionDTO : componentDescriptionDTOs) {
+		    				componentConfigurationDTOs.addAll(serviceComponentRuntime.getComponentConfigurationDTOs(componentDescriptionDTO));
+						}
+						treeViewer.setInput(componentConfigurationDTOs);
+						treeViewer.refresh(true);
+					}
+					
+				}
+			}
+		} catch (InvalidSyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

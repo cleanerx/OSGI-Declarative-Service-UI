@@ -62,9 +62,9 @@
          id="org.osgi.ds.ui.selectcomponent"
          name="Select Component">
    </command>
-<!--   <command
+   <command
          description="Shows the unsatisfied configation components"
-         id="org.osgi.ds.ui.showunsatisfiedconfigx"
+         id="org.osgi.ds.ui.showunsatisfiedconfig"
          name="Show Unsatisfied Configuration">
    </command>
    <command
@@ -85,7 +85,7 @@
    <command
          id="org.osgi.ds.ui.selectscr"
          name="name">
-   </command>-->
+   </command>
 
 </extension>
 <extension
@@ -118,18 +118,8 @@
          allPopups="false"
          locationURI="toolbar:org.osgi.ds.ui.componentlist?after=additions">
       <command
-            commandId="org.osgi.ds.ui.selectscr"
-            icon="res/providedService.png"
-            style="push">
-      </command>
-      <command
-            commandId="com.kuebler.osgi.ds.ui.addconnection"
-            icon="res/satisfied.png"
-            style="push">
-      </command>
-      <command
             commandId="com.kuebler.osgi.ds.ui.refresh"
-            icon="res/unsatisfied.png"
+            icon="res/Actions-view-refresh-icon.png"
             style="push">
       </command>
       <dynamic
