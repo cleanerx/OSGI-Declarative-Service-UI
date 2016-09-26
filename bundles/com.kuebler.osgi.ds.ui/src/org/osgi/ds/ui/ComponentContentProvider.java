@@ -29,10 +29,10 @@ import org.eclipse.jface.viewers.Viewer;
 import org.osgi.dto.DTO;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
-import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
-import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
-import org.osgi.service.component.runtime.dto.SatisfiedReferenceDTO;
-import org.osgi.service.component.runtime.dto.UnsatisfiedReferenceDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentDescriptionDTO;
+import org.osgi.service.component.runtime.dto.serial.SatisfiedReferenceDTO;
+import org.osgi.service.component.runtime.dto.serial.UnsatisfiedReferenceDTO;
 
 public class ComponentContentProvider implements ITreeContentProvider {
 

@@ -5,7 +5,7 @@
     <property name="service.exported.interfaces" value="*"/>
     <property name="service.exported.configs" value="ecf.generic.server"/>
     <service>
-        <provide interface="org.osgi.service.component.runtime.ServiceComponentRuntime"/>
+        <provide interface="org.osgi.service.component.runtime.serial.ServiceComponentRuntime"/>
     </service>
     <reference name="SCRManager" interface="org.apache.felix.scr.ScrService" cardinality="1..1" policy="dynamic" bind="bindSCRManager" unbind="unbindSCRManager"/>
 </scr:component>

@@ -32,10 +32,10 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
-import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
-import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
-import org.osgi.service.component.runtime.dto.SatisfiedReferenceDTO;
-import org.osgi.service.component.runtime.dto.UnsatisfiedReferenceDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentDescriptionDTO;
+import org.osgi.service.component.runtime.dto.serial.SatisfiedReferenceDTO;
+import org.osgi.service.component.runtime.dto.serial.UnsatisfiedReferenceDTO;
 
 /**
  *

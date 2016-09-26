@@ -17,7 +17,7 @@ package org.osgi.ds.ui;
 
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentConfigurationDTO;
 
 public class ComponentStateFilter extends ViewerFilter {
 

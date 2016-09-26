@@ -29,17 +29,17 @@ import org.apache.felix.scr.ScrService;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceReference;
-import org.osgi.framework.dto.ServiceReferenceDTO;
+import org.osgi.framework.dto.serial.ServiceReferenceDTO;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
-import org.osgi.service.component.runtime.ServiceComponentRuntime;
-import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
-import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
-import org.osgi.service.component.runtime.dto.ReferenceDTO;
-import org.osgi.service.component.runtime.dto.SatisfiedReferenceDTO;
-import org.osgi.service.component.runtime.dto.UnsatisfiedReferenceDTO;
+import org.osgi.service.component.runtime.serial.ServiceComponentRuntime;
+import org.osgi.service.component.runtime.dto.serial.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentDescriptionDTO;
+import org.osgi.service.component.runtime.dto.serial.ReferenceDTO;
+import org.osgi.service.component.runtime.dto.serial.SatisfiedReferenceDTO;
+import org.osgi.service.component.runtime.dto.serial.UnsatisfiedReferenceDTO;
 import org.osgi.util.promise.Promise;
 
 @Component(property = {"service.exported.interfaces=*", "service.exported.configs=ecf.generic.server"})

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.osgi.service.component.runtime.dto;
+package org.osgi.service.component.runtime.dto.serial;
 
 import java.io.Serializable;
 import java.util.Map;
