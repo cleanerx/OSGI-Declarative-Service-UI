@@ -246,12 +246,18 @@ private ServiceTracker<IEndpointDescriptionLocator, IEndpointDescriptionLocator>
 	    _tableViewer.getTable().setHeaderVisible(true);
 	    _tableViewer.getTable().setLinesVisible(true);
 
+	    EndpointCellLabelProvider labelProvider = new EndpointCellLabelProvider();
 	    TableViewerColumn tableViewerColumnVersion = new TableViewerColumn(_tableViewer, SWT.RESIZE);
-	    tableViewerColumnVersion.getColumn().setText("Service Component Runtime"); //$NON-NLS-1$
-	    tableViewerColumnVersion.getColumn().setWidth(70);
+	    tableViewerColumnVersion.getColumn().setText("Framework ID"); //$NON-NLS-1$
+	    tableViewerColumnVersion.getColumn().setWidth(240);
+	    tableViewerColumnVersion.setLabelProvider(labelProvider);
+	    TableViewerColumn tableViewerColumnVersion2 = new TableViewerColumn(_tableViewer, SWT.RESIZE);
+	    tableViewerColumnVersion2.getColumn().setText("Server"); //$NON-NLS-1$
+	    tableViewerColumnVersion2.getColumn().setWidth(500);
+		tableViewerColumnVersion2.setLabelProvider(labelProvider);
 
 	    _tableViewer.setContentProvider(new ArrayContentProvider());
-	    _tableViewer.setLabelProvider(new LabelProvider());
+//	    _tableViewer.setLabelProvider(new EndpointLabelProvider());
 	    
 	    _tableViewer.setInput(serviceTracker.getService().getDiscoveredEndpoints());
 
@@ -283,6 +289,7 @@ private ServiceTracker<IEndpointDescriptionLocator, IEndpointDescriptionLocator>
 	        EndpointDescription ed = (EndpointDescription) ((IStructuredSelection)selection).getFirstElement();
 	        String id2 = ed.getId();
 	        ((ComponentViewer)getWorkbenchWindow().getActivePage().getActivePart()).setEndpointId(ed.getFrameworkUUID(), id2);
+//	        _toolItem.setText(ed.getFrameworkUUID());
 	        setChosenEndpoint(((IStructuredSelection)selection).getFirstElement());
 	        close();
 	      }

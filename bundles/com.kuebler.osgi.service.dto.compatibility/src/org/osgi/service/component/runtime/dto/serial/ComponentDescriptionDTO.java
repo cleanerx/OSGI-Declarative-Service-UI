@@ -19,7 +19,7 @@ package org.osgi.service.component.runtime.dto.serial;
 import java.io.Serializable;
 import java.util.Map;
 import org.osgi.dto.DTO;
-import org.osgi.framework.dto.BundleDTO;
+import org.osgi.framework.dto.serial.BundleDTO;
 
 /**
  * A representation of a declared component description.

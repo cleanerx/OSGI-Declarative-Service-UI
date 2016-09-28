@@ -16,6 +16,7 @@
 
 package org.osgi.framework.dto.serial;
 
+import java.io.Serializable;
 import java.util.Map;
 import org.osgi.dto.DTO;
 import org.osgi.framework.Constants;
@@ -35,8 +36,13 @@ import org.osgi.framework.ServiceReference;
  * @author $Id: 2c70b84f28c41fb51c488cb03950a46188ea209f $
  * @NotThreadSafe
  */
-public class ServiceReferenceDTO extends DTO {
+public class ServiceReferenceDTO extends DTO implements Serializable {
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2865048979395313666L;
+
+	/**
 	 * The id of the service.
 	 * 
 	 * @see Constants#SERVICE_ID

@@ -47,13 +47,10 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 public class ComponentViewer extends ViewPart  {
 	private ComponentStateFilter componentFilter;
 	private TreeViewer treeViewer;
-	private Map<String, ComponentConfigurationDTO[]> scr2dtos;
 	private ServiceTracker<ServiceComponentRuntime, ServiceComponentRuntime> componentRuntimeTracker;
-	private ServiceReference<?>[] serviceReferences;
 	private ServiceComponentRuntime serviceComponentRuntime;
 
 	public ComponentViewer() {
-		scr2dtos = new HashMap<String, ComponentConfigurationDTO[]>();
 	}
 
 	@Override
@@ -122,17 +119,6 @@ public class ComponentViewer extends ViewPart  {
 		getViewSite().setSelectionProvider(treeViewer);
 	}
 
-//	private BundleContext updateTreeViewerContents() {
-//		BundleContext bundleContext = DSUIActivator.getDefault().getBundle().getBundleContext();
-//		ServiceReference<ScrService> serviceReference = bundleContext.getServiceReference(ScrService.class);
-//		try {
-//			StrippedServiceComponentRuntime service = componentRuntimeTracker.getService();
-//		} finally {
-//			bundleContext.ungetService(serviceReference);
-//		}
-//		return bundleContext;
-//	}
-
 	@Override
 	public void setFocus() {
 		// TODO Auto-generated method stub
@@ -141,11 +127,6 @@ public class ComponentViewer extends ViewPart  {
 
 	public void setFilterStates(int filter) {
 		componentFilter.setFilter(filter);
-//		StrippedServiceComponentRuntime service = componentRuntimeTracker.getService();
-//		if(service != null) {
-//			Collection<ComponentConfigurationDTO> allComponentConfigurationDTO = service.getAllComponentConfigurationDTO();
-//			treeViewer.setInput(allComponentConfigurationDTO);
-//		}
 		treeViewer.refresh();
 	}
 
@@ -176,20 +157,22 @@ public class ComponentViewer extends ViewPart  {
 	public void setEndpointId(String frameworkUUID, String endpointID) {
 		try {
 			 BundleContext bundleContext = DSUIActivator.getDefault().getBundle().getBundleContext();
-			ServiceReference<?>[] serviceReferences2 = bundleContext.getServiceReferences("org.osgi.service.component.runtime.ServiceComponentRuntime", null);
-			for (ServiceReference<?> serviceReference : serviceReferences2) {
-				if(endpointID.equals(serviceReference.getProperty("endpoint.id")) || frameworkUUID.equals(bundleContext.getProperty(Constants.FRAMEWORK_UUID))) {
-					serviceComponentRuntime = (ServiceComponentRuntime)bundleContext.getService(serviceReference);
-					if(serviceComponentRuntime != null) {
-		    			Collection<ComponentDescriptionDTO> componentDescriptionDTOs = serviceComponentRuntime.getComponentDescriptionDTOs();
-		    			Collection<ComponentConfigurationDTO> componentConfigurationDTOs = new ArrayList<>();
-		    			for (ComponentDescriptionDTO componentDescriptionDTO : componentDescriptionDTOs) {
-		    				componentConfigurationDTOs.addAll(serviceComponentRuntime.getComponentConfigurationDTOs(componentDescriptionDTO));
+			ServiceReference<?>[] serviceReferences2 = bundleContext.getServiceReferences("org.osgi.service.component.runtime.serial.ServiceComponentRuntime", null);
+			if(serviceReferences2 != null) {
+				for (ServiceReference<?> serviceReference : serviceReferences2) {
+					if(endpointID.equals(serviceReference.getProperty("endpoint.id")) || (serviceReference.getProperty("endpoint.id") == null && frameworkUUID.equals(bundleContext.getProperty(Constants.FRAMEWORK_UUID)))) {
+						serviceComponentRuntime = (ServiceComponentRuntime)bundleContext.getService(serviceReference);
+						if(serviceComponentRuntime != null) {
+							Collection<ComponentDescriptionDTO> componentDescriptionDTOs = serviceComponentRuntime.getComponentDescriptionDTOs();
+							Collection<ComponentConfigurationDTO> componentConfigurationDTOs = new ArrayList<>();
+							for (ComponentDescriptionDTO componentDescriptionDTO : componentDescriptionDTOs) {
+								componentConfigurationDTOs.addAll(serviceComponentRuntime.getComponentConfigurationDTOs(componentDescriptionDTO));
+							}
+							treeViewer.setInput(componentConfigurationDTOs);
+							treeViewer.refresh(true);
 						}
-						treeViewer.setInput(componentConfigurationDTOs);
-						treeViewer.refresh(true);
+						
 					}
-					
 				}
 			}
 		} catch (InvalidSyntaxException e) {
