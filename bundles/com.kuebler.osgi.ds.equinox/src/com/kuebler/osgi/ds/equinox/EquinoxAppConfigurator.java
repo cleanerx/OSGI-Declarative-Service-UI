@@ -2,6 +2,7 @@ package com.kuebler.osgi.ds.equinox;
 
 import java.io.IOException;
 import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -25,8 +26,16 @@ public class EquinoxAppConfigurator {
 	public void activate() throws IOException {
 		ConfigurationAdmin configurationAdmin = _configAdmin.get();
 		Configuration configuration = configurationAdmin.getConfiguration(EquinoxSCR.class.getName());
-		Dictionary<String, Object> properties = configuration.getProperties();
-		Properties properties2 = System.getProperties();
+		Dictionary<String, Object> properties = new Hashtable<>();
+		String application = System.getProperty("eclipse.application");
+		String product = System.getProperty("eclipse.product");
+		
+		if(application != null) {
+			properties.put("eclipse.application", application);
+		}
+		if(product != null) {
+			properties.put("eclipse.product", product);
+		}
 		configuration.update(properties);
 	}
 
