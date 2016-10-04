@@ -9,7 +9,7 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
  JavaSE-1.7,
  JavaSE-1.8
-Service-Component: OSGI-INF/org.osgi.scr.rmi.client.RMIStrippedSCRServiceManager.xml
+Service-Component: OSGI-INF/org.osgi.scr.rmi.client.RMIServiceNotifier.xml
 Import-Package: com.kuebler.osgi.service.dto.serial;resolution:=optional,
  org.osgi.framework.dto;version="1.8.0",
  org.osgi.scr.rmi.api;version="[1.0.0,2.0.0)",

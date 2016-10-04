@@ -85,7 +85,7 @@ public class ComponentVisualizationView extends ViewPart implements ISelectionLi
     red = new Color(Display.getDefault(), new RGB(255, 129, 129));
     yellow = new Color(Display.getDefault(), new RGB(250, 255, 125));
     green = new Color(Display.getDefault(), new RGB(155, 222, 141));
-    blue = new Color(Display.getDefault(), new RGB(0, 0, 255));
+    blue = new Color(Display.getDefault(), new RGB(200, 200, 255));
   }
 
   /**

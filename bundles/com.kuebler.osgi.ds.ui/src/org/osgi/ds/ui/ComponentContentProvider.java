@@ -20,11 +20,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.felix.scr.Component;
 import org.apache.felix.scr.Reference;
+import org.apache.felix.scr.ScrService;
 import org.eclipse.equinox.internal.ds.model.ServiceComponentProp;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.osgi.dto.DTO;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.runtime.dto.serial.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentDescriptionDTO;
 import org.osgi.service.component.runtime.dto.serial.SatisfiedReferenceDTO;
 import org.osgi.service.component.runtime.dto.serial.UnsatisfiedReferenceDTO;
 
