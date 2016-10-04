@@ -15,7 +15,7 @@
  */
 package org.osgi.ds.ui.handler;
 
-import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentConfigurationDTO;
 
 public class FilterConfigurationUnsatisfiedComponentsHandler extends AbstractComponentHandler {
 

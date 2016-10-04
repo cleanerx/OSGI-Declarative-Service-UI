@@ -1,6 +1,6 @@
 package org.osgi.service.scr.api;
 
-import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentConfigurationDTO;
 
 public interface IComponentListener {
 	

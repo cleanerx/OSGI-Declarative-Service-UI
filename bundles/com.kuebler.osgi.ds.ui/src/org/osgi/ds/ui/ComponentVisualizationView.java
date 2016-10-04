@@ -51,13 +51,13 @@ import org.eclipse.zest.layouts.LayoutStyles;
 import org.eclipse.zest.layouts.algorithms.RadialLayoutAlgorithm;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
-import org.osgi.framework.dto.ServiceReferenceDTO;
-import org.osgi.service.component.runtime.ServiceComponentRuntime;
-import org.osgi.service.component.runtime.dto.ComponentConfigurationDTO;
-import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
-import org.osgi.service.component.runtime.dto.ReferenceDTO;
-import org.osgi.service.component.runtime.dto.SatisfiedReferenceDTO;
-import org.osgi.service.component.runtime.dto.UnsatisfiedReferenceDTO;
+import org.osgi.framework.dto.serial.ServiceReferenceDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentConfigurationDTO;
+import org.osgi.service.component.runtime.dto.serial.ComponentDescriptionDTO;
+import org.osgi.service.component.runtime.dto.serial.ReferenceDTO;
+import org.osgi.service.component.runtime.dto.serial.SatisfiedReferenceDTO;
+import org.osgi.service.component.runtime.dto.serial.UnsatisfiedReferenceDTO;
+import org.osgi.service.component.runtime.serial.ServiceComponentRuntime;
 
 /**
  *
