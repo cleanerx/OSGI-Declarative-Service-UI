@@ -3,7 +3,6 @@ package com.kuebler.osgi.ds.equinox;
 import java.io.IOException;
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.Properties;
 import java.util.concurrent.atomic.AtomicReference;
 
 import org.osgi.service.cm.Configuration;
@@ -29,12 +28,16 @@ public class EquinoxAppConfigurator {
 		Dictionary<String, Object> properties = new Hashtable<>();
 		String application = System.getProperty("eclipse.application");
 		String product = System.getProperty("eclipse.product");
+		String instanceArea = System.getProperty("osgi.instance.area");
 		
 		if(application != null) {
 			properties.put("eclipse.application", application);
 		}
 		if(product != null) {
 			properties.put("eclipse.product", product);
+		}
+		if(instanceArea != null) {
+			properties.put("osgi.instance.area", instanceArea);
 		}
 		configuration.update(properties);
 	}
