@@ -255,6 +255,14 @@ private ServiceTracker<IEndpointDescriptionLocator, IEndpointDescriptionLocator>
 	    tableViewerColumnVersion2.getColumn().setText("Server"); //$NON-NLS-1$
 	    tableViewerColumnVersion2.getColumn().setWidth(500);
 		tableViewerColumnVersion2.setLabelProvider(labelProvider);
+	    TableViewerColumn tableViewerColumnVersion3 = new TableViewerColumn(_tableViewer, SWT.RESIZE);
+	    tableViewerColumnVersion3.getColumn().setText("Application"); //$NON-NLS-1$
+	    tableViewerColumnVersion3.getColumn().setWidth(500);
+		tableViewerColumnVersion3.setLabelProvider(labelProvider);
+	    TableViewerColumn tableViewerColumnVersion4 = new TableViewerColumn(_tableViewer, SWT.RESIZE);
+	    tableViewerColumnVersion4.getColumn().setText("osgi.instance.area"); //$NON-NLS-1$
+	    tableViewerColumnVersion4.getColumn().setWidth(500);
+		tableViewerColumnVersion4.setLabelProvider(labelProvider);
 
 	    _tableViewer.setContentProvider(new ArrayContentProvider());
 //	    _tableViewer.setLabelProvider(new EndpointLabelProvider());

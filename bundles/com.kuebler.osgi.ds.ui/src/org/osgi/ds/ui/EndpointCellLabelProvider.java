@@ -17,6 +17,12 @@ final class EndpointCellLabelProvider extends CellLabelProvider {
 				} else if(cell.getColumnIndex() == 1) {
 					Map<String, Object> properties = endpointDescription.getProperties();
 					cell.setText(properties.get("ecf.endpoint.id").toString());
+				} else if(cell.getColumnIndex() == 2) {
+					Map<String, Object> properties = endpointDescription.getProperties();
+					cell.setText(properties.get("eclipse.application").toString());
+				} else if(cell.getColumnIndex() == 3) {
+					Map<String, Object> properties = endpointDescription.getProperties();
+					cell.setText(properties.get("osgi.instance.area").toString());
 				}
 				
 			}
