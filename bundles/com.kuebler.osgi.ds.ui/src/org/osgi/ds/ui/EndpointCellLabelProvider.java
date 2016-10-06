@@ -16,13 +16,22 @@ final class EndpointCellLabelProvider extends CellLabelProvider {
 					cell.setText(endpointDescription.getFrameworkUUID());
 				} else if(cell.getColumnIndex() == 1) {
 					Map<String, Object> properties = endpointDescription.getProperties();
-					cell.setText(properties.get("ecf.endpoint.id").toString());
+					Object endpointID = properties.get("ecf.endpoint.id");
+					if(endpointID != null) {
+						cell.setText(endpointID.toString());
+					}
 				} else if(cell.getColumnIndex() == 2) {
 					Map<String, Object> properties = endpointDescription.getProperties();
-					cell.setText(properties.get("eclipse.application").toString());
+					Object application = properties.get("eclipse.application");
+					if(application != null) {
+						cell.setText(application.toString());
+					}
 				} else if(cell.getColumnIndex() == 3) {
 					Map<String, Object> properties = endpointDescription.getProperties();
-					cell.setText(properties.get("osgi.instance.area").toString());
+					Object instanceArea = properties.get("osgi.instance.area");
+					if(instanceArea != null) {
+						cell.setText(instanceArea.toString());
+					}
 				}
 				
 			}
