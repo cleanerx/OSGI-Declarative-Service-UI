@@ -267,7 +267,8 @@ private ServiceTracker<IEndpointDescriptionLocator, IEndpointDescriptionLocator>
 	    _tableViewer.setContentProvider(new ArrayContentProvider());
 //	    _tableViewer.setLabelProvider(new EndpointLabelProvider());
 	    
-	    _tableViewer.setInput(serviceTracker.getService().getDiscoveredEndpoints());
+	    EndpointDescription[] endpoints = serviceTracker.getService().getDiscoveredEndpoints();
+	    _tableViewer.setInput(endpoints);
 
 //	    createContextMenu();
 

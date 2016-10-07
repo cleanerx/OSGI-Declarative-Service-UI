@@ -12,6 +12,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
 import org.osgi.service.component.annotations.ReferencePolicy;
+import org.osgi.service.component.runtime.serial.ServiceComponentRuntime;
 
 /**
  *
@@ -39,6 +40,10 @@ public class EquinoxAppConfigurator {
 		if(instanceArea != null) {
 			properties.put("osgi.instance.area", instanceArea);
 		}
+		properties.put("service.exported.interfaces", "*");
+		properties.put("service.exported.configs", "ecf.generic.server");
+		properties.put("objectClass",ServiceComponentRuntime.class.getName());
+		
 		configuration.update(properties);
 	}
 
